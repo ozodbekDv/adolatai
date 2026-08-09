@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Briefcase,
   ShoppingBag,
@@ -11,9 +12,105 @@ import {
   Circle,
   ChevronDown,
   X,
+  FileText,
+  Copy,
+  Download,
+  Printer,
+  Sparkles,
+  ArrowRight,
+  ArrowLeft,
+  Calendar,
+  ShieldAlert,
+  Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "../hooks/useI18n";
+
+// Dynamic Legal Data per Category
+const LEGAL_DATA_BY_CATEGORY = {
+  work: {
+    laws: [
+      {
+        title: "Mehnat Kodeksi 161-modda — Mehnat shartnomasini bekor qilish",
+        desc: "Mehnat shartnomasi qonunda nazarda tutilgan asoslar bo'yicha bekor qilinadi.",
+      },
+      {
+        title: "Mehnat Kodeksi 244-modda — Ish haqini to'lash muddatlari",
+        desc: "Ish beruvchi xodimga ish haqini o'z vaqtida va to'liq to'lashi shart.",
+      },
+    ],
+    actions: [
+      "Ish beruvchiga rasmiy yozma e'tiroz yoki talabnoma yuboring.",
+      "Mehnat inspektsiyasiga (Bandlik vazirligi) murojaat yo'llang.",
+      "Natija bo'lmagan taqdirda Fuqarolik ishlar bo'yicha sudga da'vo arizasi kiriting.",
+    ],
+  },
+  consumer: {
+    laws: [
+      {
+        title: "Iste'molchilar huquqlarini himoya qilish to'g'risida 18-modda",
+        desc: "Nuqsonli tovar sotilganda iste'molchi uni almashtirish yoki pulini qaytarishni talab qilishga haqli.",
+      },
+    ],
+    actions: [
+      "Sotuvchi/xizmat ko'rsatuvchiga chek va dalillar bilan yozma talabnoma bering.",
+      "Iste'molchilar huquqlarini himoya qilish agentligiga murojaat qiling.",
+    ],
+  },
+  housing: {
+    laws: [
+      {
+        title: "Uy-joy Kodeksi 11-modda — Uy-joy huquqlarini himoya qilish",
+        desc: "Uy-joyga oid buzilgan huquqlar qonunchilikda nazarda tutilgan tartibda himoya qilinadi.",
+      },
+      {
+        title: "Uy-joy Kodeksi 86-modda — Turar joyni arendaga berish",
+        desc: "Turar joydan haq evaziga foydalanish shartnoma bilan rasmiylashtiriladi.",
+      },
+    ],
+    actions: [
+      "Ijaraga beruvchi yoki qarshi tomonga yozma bildirishnoma yuboring.",
+      "Uy-joy shartnomasi va to'lov kvitansiyalarini tayyorlab qo'ying.",
+      "Hududiy fuqarolik sudiga ariza bilan murojaat qiling.",
+    ],
+  },
+  utilities: {
+    laws: [
+      {
+        title: "Kommunal xizmat ko'rsatish qoidalari — Xizmat sifati",
+        desc: "Tashkilot iste'molchini uzluksiz va sifatli kommunal xizmat bilan ta'minlashi shart.",
+      },
+    ],
+    actions: [
+      "Tegishli kommunal korxonaga (gaz, elektr, suv) rasmiy e'tiroz yuboring.",
+      "MIB yoki Bosh prokuratura qoshidagi inspektsiyaga xabar bering.",
+    ],
+  },
+  fines: {
+    laws: [
+      {
+        title: "MJtK 315-modda — Ma'muriy nohaq qaror ustidan shikoyat",
+        desc: "Jarima qarori ustidan 10 kun muddatda yuqori organga yoki sudga shikoyat qilinishi mumkin.",
+      },
+    ],
+    actions: [
+      "Qaror yoki bayonnoma nusxasini oling.",
+      "10 kunlik muddatni o'tkazib yubormasdan ma'muriy sudga shikoyat kiriting.",
+    ],
+  },
+  family: {
+    laws: [
+      {
+        title: "Oila Kodeksi 96-modda — Aliment undirish",
+        desc: "Ota-ona voyaga yetmagan bolalariga ta'minot berishi shart.",
+      },
+    ],
+    actions: [
+      "Aliment undirish bo'yicha fuqarolik sudiga ariza yuboring.",
+      "Bolalarning tug'ilganlik haqidagi guvohnomalari nusxasini tayyorlang.",
+    ],
+  },
+};
 
 export default function StepWizard() {
   const { t } = useI18n();
@@ -21,7 +118,7 @@ export default function StepWizard() {
   // Wizard Dynamic State
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
-    category: "",
+    category: "housing",
     fullName: "",
     opponent: "",
     date: "",
@@ -34,13 +131,17 @@ export default function StepWizard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  // Step 1 Categories
+  // Bugungi sana dinamik
+  const currentDateFormatted = useMemo(() => {
+    const today = new Date();
+    return today.toISOString().split("T")[0];
+  }, []);
+
   const categories = [
     {
       id: "work",
       icon: Briefcase,
-      color:
-        "text-amber-600 bg-amber-500/10 dark:text-amber-400 dark:bg-amber-400/10",
+      color: "text-amber-500 bg-amber-500/10 border-amber-500/20",
       title: t("stepWizard.categories.work.title") || "Ish va mehnat",
       subtitle:
         t("stepWizard.categories.work.subtitle") ||
@@ -49,8 +150,7 @@ export default function StepWizard() {
     {
       id: "consumer",
       icon: ShoppingBag,
-      color:
-        "text-blue-600 bg-blue-500/10 dark:text-blue-400 dark:bg-blue-400/10",
+      color: "text-blue-500 bg-blue-500/10 border-blue-500/20",
       title: t("stepWizard.categories.consumer.title") || "Iste'molchi huquqi",
       subtitle:
         t("stepWizard.categories.consumer.subtitle") ||
@@ -59,8 +159,7 @@ export default function StepWizard() {
     {
       id: "housing",
       icon: Home,
-      color:
-        "text-orange-600 bg-orange-500/10 dark:text-orange-400 dark:bg-orange-400/10",
+      color: "text-cyan-500 bg-cyan-500/10 border-cyan-500/20",
       title: t("stepWizard.categories.housing.title") || "Uy-joy va mulk",
       subtitle:
         t("stepWizard.categories.housing.subtitle") ||
@@ -69,8 +168,7 @@ export default function StepWizard() {
     {
       id: "utilities",
       icon: Lightbulb,
-      color:
-        "text-yellow-600 bg-yellow-500/10 dark:text-yellow-400 dark:bg-yellow-400/10",
+      color: "text-yellow-500 bg-yellow-500/10 border-yellow-500/20",
       title: t("stepWizard.categories.utilities.title") || "Kommunal xizmatlar",
       subtitle:
         t("stepWizard.categories.utilities.subtitle") ||
@@ -79,7 +177,7 @@ export default function StepWizard() {
     {
       id: "fines",
       icon: Car,
-      color: "text-red-600 bg-red-500/10 dark:text-red-400 dark:bg-red-400/10",
+      color: "text-rose-500 bg-rose-500/10 border-rose-500/20",
       title: t("stepWizard.categories.fines.title") || "Jarimalar",
       subtitle:
         t("stepWizard.categories.fines.subtitle") ||
@@ -88,8 +186,7 @@ export default function StepWizard() {
     {
       id: "family",
       icon: Users,
-      color:
-        "text-emerald-600 bg-emerald-500/10 dark:text-emerald-400 dark:bg-emerald-400/10",
+      color: "text-emerald-500 bg-emerald-500/10 border-emerald-500/20",
       title: t("stepWizard.categories.family.title") || "Oila huquqi",
       subtitle:
         t("stepWizard.categories.family.subtitle") ||
@@ -97,42 +194,48 @@ export default function StepWizard() {
     },
   ];
 
-  // Step 3 Evidences
   const evidenceList = [
     {
       id: "contract",
-      label: t("stepWizard.evidences.contract"),
+      label: t("stepWizard.evidences.contract") || "Shartnoma nusxasi",
     },
     {
       id: "receipt",
-      label: t("stepWizard.evidences.receipt"),
+      label: t("stepWizard.evidences.receipt") || "To'lov cheki / Kvitansiya",
     },
     {
       id: "photo_video",
-      label: t("stepWizard.evidences.photo_video"),
+      label: t("stepWizard.evidences.photo_video") || "Foto va video dalillar",
     },
     {
       id: "messages",
-      label: t("stepWizard.evidences.messages"),
+      label: t("stepWizard.evidences.messages") || "Yozishmalar (SMS/Telegram)",
     },
     {
       id: "witness",
-      label: t("stepWizard.evidences.witness"),
+      label: t("stepWizard.evidences.witness") || "Guvohlar ko'rsatmasi",
     },
     {
       id: "previous_appeal",
-      label: t("stepWizard.evidences.previous_appeal"),
+      label:
+        t("stepWizard.evidences.previous_appeal") || "Oldingi rasmiy murojaat",
     },
   ];
 
   const stepsList = [
-    { id: 1, title: t("stepWizard.steps.direction") },
-    { id: 2, title: t("stepWizard.steps.situation") },
-    { id: 3, title: t("stepWizard.steps.evidence") },
-    { id: 4, title: t("stepWizard.steps.result") },
+    { id: 1, title: t("stepWizard.steps.direction") || "Yo'nalish" },
+    { id: 2, title: t("stepWizard.steps.situation") || "Vaziyat" },
+    { id: 3, title: t("stepWizard.steps.evidence") || "Dalillar" },
+    { id: 4, title: t("stepWizard.steps.result") || "Natija" },
   ];
 
-  // Dinamik tayyorlanadigan murojaat matni
+  const currentLegalInfo = useMemo(() => {
+    return (
+      LEGAL_DATA_BY_CATEGORY[formData.category] ||
+      LEGAL_DATA_BY_CATEGORY.housing
+    );
+  }, [formData.category]);
+
   const generateAppealText = () => {
     const selectedEvidencesText = formData.evidences
       .map((id) => evidenceList.find((item) => item.id === id)?.label)
@@ -148,21 +251,23 @@ export default function StepWizard() {
           .join("\n")
       : "1. Mavjud emas";
 
+    const legalNormsFormatted = currentLegalInfo.laws
+      .map((law) => `${law.title}\n   (${law.desc})`)
+      .join("\n\n");
+
     return `TUMAN/SHAHAR HOKIMLIGI YOKI FUQAROLIK ISHLARI BO‘YICHA SUDGA
 
-Kimdan: ${formData.fullName || "John Doe"}
-Manzil va aloqa: [kiriting]
+Kimdan: ${formData.fullName || "[Ism Familiyangiz]"}
+Manzil va aloqa: [Telefon / Manzilingiz]
 
 ARIZA
 
-Men, ${formData.fullName || "John Doe"}, ${formData.date || "[sana]"} sanasida ${formData.opponent || "[tashkilot/shaxs]"} bilan bog‘liq quyidagi holat yuzasidan murojaat qilaman:
+Men, ${formData.fullName || "[Ism Familiyangiz]"}, ${formData.date || "[sana]"} sanasida ${formData.opponent || "[tashkilot/shaxs]"} bilan bog‘liq quyidagi holat yuzasidan murojaat qilaman:
 
-${formData.description || "[vaziyat matni]"}
+${formData.description || "[Vaziyat batafsil bayoni]"}
 
-HUQUQIY ASOS:
-11-modda — Uy-joyga oid buzilgan huquqlar qonunchilikda nazarda tutilgan tartibda himoya qilinadi.
-86-modda — Turar joydan haq evaziga foydalanish arenda shartnomasi bilan rasmiylashtiriladi; taraflarning huquq va majburiyatlari shu hujjatda qayd etilishi muhim.
-87-modda — Turar joyni arendaga berish qonundagi talablar va mulkdorning vakolati asosida amalga oshiriladi.
+HUQUQIY ASOSLAR:
+${legalNormsFormatted}
 
 SHU ASOSDA SO‘RAYMAN:
 1. Bayon qilingan holatni vakolatingiz doirasida tekshirishingizni;
@@ -172,19 +277,15 @@ SHU ASOSDA SO‘RAYMAN:
 ILOVALAR:
 ${ilovalarFormatted}
 
-Sana: [kiriting]                 Imzo: __________
-
-Eslatma: faktlar, organ vakolati va talablarni yuborishdan oldin tekshiring.`;
+Sana: ${currentDateFormatted}             Imzo: __________`;
   };
 
-  // Matnni buferga nusxalash
   const handleCopyText = () => {
     navigator.clipboard.writeText(generateAppealText());
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
-  // Word (.doc) ko'rinishida yuklash
   const handleDownloadWord = () => {
     const text = generateAppealText();
     const blob = new Blob(["\ufeff" + text], {
@@ -199,7 +300,6 @@ Eslatma: faktlar, organ vakolati va talablarni yuborishdan oldin tekshiring.`;
     document.body.removeChild(link);
   };
 
-  // PDF ko'rinishida yuklash (printer orqali)
   const handleDownloadPDF = () => {
     const printWindow = window.open("", "", "width=800,height=600");
     if (printWindow) {
@@ -208,8 +308,8 @@ Eslatma: faktlar, organ vakolati va talablarni yuborishdan oldin tekshiring.`;
           <head>
             <title>Murojaat Matni</title>
             <style>
-              body { font-family: Arial, sans-serif; padding: 40px; line-height: 1.6; color: #111; }
-              pre { font-family: inherit; white-space: pre-wrap; word-wrap: break-word; }
+              body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 40px; line-height: 1.6; color: #111; }
+              pre { font-family: inherit; white-space: pre-wrap; word-wrap: break-word; font-size: 14px; }
             </style>
           </head>
           <body>
@@ -224,7 +324,6 @@ Eslatma: faktlar, organ vakolati va talablarni yuborishdan oldin tekshiring.`;
     }
   };
 
-  // Handlers
   const handleNext = () => {
     if (currentStep < 4) setCurrentStep((prev) => prev + 1);
   };
@@ -236,7 +335,7 @@ Eslatma: faktlar, organ vakolati va talablarni yuborishdan oldin tekshiring.`;
   const handleReset = () => {
     setCurrentStep(1);
     setFormData({
-      category: "",
+      category: "housing",
       fullName: "",
       opponent: "",
       date: "",
@@ -262,419 +361,549 @@ Eslatma: faktlar, organ vakolati va talablarni yuborishdan oldin tekshiring.`;
     <>
       <section
         id="stages"
-        className="w-full py-16 px-6 md:px-12 lg:px-24 border-t border-slate-200 dark:border-slate-800/60"
+        className="w-full py-12 px-4 md:px-12 lg:px-20 border-t border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 relative overflow-hidden transition-colors duration-300"
       >
-        <div className="max-w-7xl mx-auto space-y-6">
-          {/* Header & Reset */}
+        {/* Glow orqa foni */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-cyan-500/20 via-emerald-500/10 to-indigo-500/20 blur-[130px] pointer-events-none rounded-full" />
+
+        <div className="max-w-7xl mx-auto space-y-8 relative z-10">
+          {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <p className="text-xs md:text-sm font-bold tracking-widest text-teal-600 dark:text-cyan-400 uppercase mb-1">
-                {t("stepWizard.headerLabel")}
-              </p>
-
-              <h2 className="text-3xl md:text-4xl font-extrabold text-foreground">
-                {t("stepWizard.headerTitle")}
+              <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-emerald-600 dark:text-emerald-400 uppercase mb-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>
+                  {t("stepWizard.headerLabel") || "AI Huquqiy Constructor"}
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+                {t("stepWizard.headerTitle") || "Huquqiy Murojaat Yaratish"}
               </h2>
             </div>
 
             <button
               onClick={handleReset}
-              className="inline-flex items-center text-sm font-semibold text-muted-foreground hover:text-foreground underline underline-offset-4 transition-colors w-fit"
+              className="inline-flex items-center text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors w-fit px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-700 bg-white dark:bg-slate-900/60 shadow-sm"
             >
-              <RotateCcw className="w-4 h-4 mr-1.5" />
-              {t("stepWizard.reset")}
+              <RotateCcw className="w-4 h-4 mr-2" />
+              {t("stepWizard.reset") || "Qayta boshlash"}
             </button>
           </div>
 
-          {/* Wizard Card Container */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl bg-[#0b1723] text-slate-100">
-            {/* Left Column: Progress Sidebar */}
-            <div className="lg:col-span-3 bg-[#44b0ba] p-6 md:p-8 flex flex-col justify-between text-slate-950">
+          {/* Main Card */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 rounded-3xl overflow-hidden border border-slate-200/80 dark:border-slate-800/80 shadow-xl dark:shadow-2xl bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl">
+            {/* Sidebar: Progress & Navigation */}
+            <div className="lg:col-span-3 bg-slate-100/70 dark:bg-slate-950/80 p-6 md:p-8 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800/80 flex flex-col justify-between">
               <div>
-                <div className="flex items-center justify-between text-xs font-bold mb-3">
-                  <span>
-                    {t(`stepWizard.step${currentStep}.unit`)}-{" "}
-                    {t(`stepWizard.progress.step`)} / 4
-                  </span>
-                  <span className="opacity-80">
-                    {currentStep === 4
-                      ? t("stepWizard.progress.ready")
-                      : `${4 - currentStep} ${t("stepWizard.progress.remaining")}`}
+                <div className="flex items-center justify-between text-xs font-bold text-slate-500 dark:text-slate-400 mb-2">
+                  <span>Qadam: {currentStep} / 4</span>
+                  <span className="text-cyan-600 dark:text-cyan-400 font-extrabold">
+                    {Math.round((currentStep / 4) * 100)}%
                   </span>
                 </div>
 
-                <div className="w-full h-1 bg-slate-950/20 rounded-full mb-8 overflow-hidden">
-                  <div
-                    className="h-full bg-amber-400 transition-all duration-300"
-                    style={{ width: `${(currentStep / 4) * 100}%` }}
-                  />
+                {/* Progress Bar mit Animatsiyalangan Liniya */}
+                <div className="relative w-full h-2.5 bg-slate-200 dark:bg-slate-800 rounded-full mb-8 overflow-hidden">
+                  <motion.div
+                    className="h-full bg-gradient-to-r from-emerald-500 via-cyan-400 to-indigo-500 rounded-full relative"
+                    initial={{ width: "25%" }}
+                    animate={{ width: `${(currentStep / 4) * 100}%` }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                  >
+                    {/* Process Line bo'ylab harakatlanuvchi nur-animatsiya */}
+                    {currentStep < 4 && (
+                      <motion.div
+                        className="absolute top-0 right-0 bottom-0 w-8 bg-white/60 blur-[2px]"
+                        animate={{ opacity: [0.2, 1, 0.2] }}
+                        transition={{ repeat: Infinity, duration: 1.2 }}
+                      />
+                    )}
+                  </motion.div>
                 </div>
 
-                <nav className="space-y-4">
+                {/* Vertical Process Steps */}
+                <div className="relative space-y-6">
+                  {/* Bosqichlar orqasidagi animatsiyali birlashtiruvchi liniya */}
+                  <div className="absolute left-[19px] top-4 bottom-4 w-0.5 bg-slate-300 dark:bg-slate-800 z-0">
+                    <motion.div
+                      className="w-full bg-gradient-to-b from-emerald-500 via-cyan-400 to-indigo-500"
+                      initial={{ height: "0%" }}
+                      animate={{
+                        height: `${((currentStep - 1) / (stepsList.length - 1)) * 100}%`,
+                      }}
+                      transition={{ duration: 0.4 }}
+                    />
+                  </div>
+
                   {stepsList.map((step) => {
                     const isActive = currentStep === step.id;
                     const isDone = currentStep > step.id;
+                    const isUpcoming = currentStep < step.id;
 
                     return (
                       <div
                         key={step.id}
-                        className={`flex items-center space-x-3 text-sm md:text-base font-semibold transition-colors ${
-                          isActive
-                            ? "text-slate-950 font-bold"
-                            : isDone
-                              ? "text-slate-900"
-                              : "text-slate-950/50"
-                        }`}
+                        className="relative z-10 flex items-center space-x-3.5 group cursor-default"
                       >
-                        {isActive ? (
-                          <span className="h-3 w-3 rounded-full bg-amber-400 ring-4 ring-amber-400/30" />
-                        ) : isDone ? (
-                          <span className="h-3 w-3 rounded-full bg-amber-400" />
-                        ) : (
-                          <Circle className="h-4 w-4 stroke-[2.5]" />
-                        )}
-                        <span>{step.title}</span>
+                        {/* Circle Indicator with Animation */}
+                        <div className="relative flex items-center justify-center">
+                          {isActive && (
+                            <motion.span
+                              className="absolute -inset-1.5 rounded-full bg-cyan-500/30 dark:bg-cyan-400/20"
+                              animate={{
+                                scale: [1, 1.25, 1],
+                                opacity: [0.7, 0.2, 0.7],
+                              }}
+                              transition={{ repeat: Infinity, duration: 1.8 }}
+                            />
+                          )}
+
+                          <div
+                            className={`w-10 h-10 rounded-xl flex items-center justify-center text-xs font-bold transition-all duration-300 shadow-sm ${
+                              isDone
+                                ? "bg-emerald-500 text-white shadow-emerald-500/20"
+                                : isActive
+                                  ? "bg-gradient-to-tr from-cyan-500 to-emerald-400 text-slate-950 font-black shadow-lg shadow-cyan-500/30 scale-105"
+                                  : "bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-slate-400"
+                            }`}
+                          >
+                            {isDone ? (
+                              <CheckCircle2 className="w-5 h-5 stroke-[2.5]" />
+                            ) : isActive ? (
+                              <Zap className="w-4 h-4 text-slate-950 fill-slate-950 animate-pulse" />
+                            ) : (
+                              step.id
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Title & Process State */}
+                        <div className="flex flex-col">
+                          <span
+                            className={`text-sm font-bold transition-colors ${
+                              isActive
+                                ? "text-cyan-600 dark:text-cyan-400"
+                                : isDone
+                                  ? "text-slate-800 dark:text-slate-200"
+                                  : "text-slate-400 dark:text-slate-500"
+                            }`}
+                          >
+                            {step.title}
+                          </span>
+                          {isActive && (
+                            <motion.span
+                              initial={{ opacity: 0, x: -5 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 tracking-wider uppercase"
+                            >
+                              Jarayonda...
+                            </motion.span>
+                          )}
+                        </div>
                       </div>
                     );
                   })}
-                </nav>
+                </div>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800/80 hidden lg:block">
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                  Barcha kiritilgan ma'lumotlar maxfiy saqlanadi va uchinchi
+                  shaxslarga berilmaydi.
+                </p>
               </div>
             </div>
 
-            {/* Right Column: Dynamic Steps Content */}
-            <div className="lg:col-span-9 p-6 md:p-10 bg-[#0b1723] flex flex-col justify-between min-h-[500px]">
-              {/* STEP 1: Yo'nalish */}
-              {currentStep === 1 && (
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-2">
-                      {t("stepWizard.step1.title")}
-                    </h3>
+            {/* Content Column */}
+            <div className="lg:col-span-9 p-6 md:p-10 flex flex-col justify-between min-h-[520px]">
+              <AnimatePresence mode="wait">
+                {/* STEP 1: Yo'nalish */}
+                {currentStep === 1 && (
+                  <motion.div
+                    key="step1"
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
+                    transition={{ duration: 0.25 }}
+                    className="space-y-6"
+                  >
+                    <div>
+                      <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-1.5">
+                        {t("stepWizard.step1.title") ||
+                          "Murojaat yo'nalishini tanlang"}
+                      </h3>
+                      <p className="text-slate-500 dark:text-slate-400 text-sm">
+                        {t("stepWizard.step1.description") ||
+                          "Muammoyingiz qaysi soha yoki sohaga oid ekanini belgilang"}
+                      </p>
+                    </div>
 
-                    <p className="text-slate-400 text-sm sm:text-base">
-                      {t("stepWizard.step1.description")}
-                    </p>
-                  </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {categories.map((cat) => {
+                        const Icon = cat.icon;
+                        const isSelected = formData.category === cat.id;
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {categories.map((cat) => {
-                      const Icon = cat.icon;
-                      const isSelected = formData.category === cat.id;
-
-                      return (
-                        <div
-                          key={cat.id}
-                          onClick={() =>
-                            setFormData({ ...formData, category: cat.id })
-                          }
-                          className={`p-4 rounded-xl border transition-all duration-200 cursor-pointer flex items-center space-x-4 ${
-                            isSelected
-                              ? "border-cyan-500 bg-slate-800/80 shadow-lg ring-1 ring-cyan-500"
-                              : "border-slate-800/80 bg-slate-900/40 hover:bg-slate-800/50 hover:border-slate-700"
-                          }`}
-                        >
-                          <div className={`p-3 rounded-lg ${cat.color}`}>
-                            <Icon className="w-6 h-6" />
+                        return (
+                          <div
+                            key={cat.id}
+                            onClick={() =>
+                              setFormData({ ...formData, category: cat.id })
+                            }
+                            className={`p-4 rounded-2xl border transition-all duration-200 cursor-pointer flex flex-col justify-between space-y-3 group ${
+                              isSelected
+                                ? "border-cyan-500 dark:border-cyan-400 bg-cyan-50/80 dark:bg-cyan-950/30 shadow-lg shadow-cyan-500/10 ring-2 ring-cyan-500/50"
+                                : "border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-950/40 hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-md"
+                            }`}
+                          >
+                            <div className="flex items-center justify-between">
+                              <div
+                                className={`p-3 rounded-xl border ${cat.color} group-hover:scale-105 transition-transform`}
+                              >
+                                <Icon className="w-6 h-6" />
+                              </div>
+                              {isSelected && (
+                                <CheckCircle2 className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
+                              )}
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-slate-900 dark:text-white text-base">
+                                {cat.title}
+                              </h4>
+                              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                                {cat.subtitle}
+                              </p>
+                            </div>
                           </div>
-                          <div>
-                            <h4 className="font-bold text-white text-base">
-                              {cat.title}
-                            </h4>
-                            <p className="text-xs text-slate-400 mt-0.5">
-                              {cat.subtitle}
-                            </p>
-                          </div>
+                        );
+                      })}
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* STEP 2: Vaziyat */}
+                {currentStep === 2 && (
+                  <motion.div
+                    key="step2"
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
+                    transition={{ duration: 0.25 }}
+                    className="space-y-6"
+                  >
+                    <div>
+                      <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-1.5">
+                        {t("stepWizard.step2.title") || "Vaziyat tafsilotlari"}
+                      </h3>
+                      <p className="text-slate-500 dark:text-slate-400 text-sm">
+                        {t("stepWizard.step2.description") ||
+                          "Arizani aniq shakllantirish uchun asosiy ma'lumotlarni kiriting"}
+                      </p>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                            {t("stepWizard.step2.fullName") ||
+                              "To'liq ism-sharifingiz"}
+                          </label>
+                          <input
+                            type="text"
+                            value={formData.fullName}
+                            onChange={(e) =>
+                              setFormData({
+                                ...formData,
+                                fullName: e.target.value,
+                              })
+                            }
+                            className="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 focus:border-cyan-500 dark:focus:border-cyan-400 rounded-xl p-3 text-sm text-slate-900 dark:text-white focus:outline-none transition-colors shadow-sm"
+                            placeholder="Masalan: Tursunaliyev Ozodbek"
+                          />
                         </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
 
-              {/* STEP 2: Vaziyat */}
-              {currentStep === 2 && (
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-1">
-                      {t("stepWizard.step2.title")}
-                    </h3>
+                        <div>
+                          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                            {t("stepWizard.step2.opponent") ||
+                              "Qarshi tomon (Shaxs / Tashkilot)"}
+                          </label>
+                          <input
+                            type="text"
+                            value={formData.opponent}
+                            onChange={(e) =>
+                              setFormData({
+                                ...formData,
+                                opponent: e.target.value,
+                              })
+                            }
+                            className="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 focus:border-cyan-500 dark:focus:border-cyan-400 rounded-xl p-3 text-sm text-slate-900 dark:text-white focus:outline-none transition-colors shadow-sm"
+                            placeholder={
+                              t("stepWizard.step2.opponentPlaceholder") ||
+                              "Tashkilot yoki shaxs nomi"
+                            }
+                          />
+                        </div>
+                      </div>
 
-                    <p className="text-slate-400 text-xs sm:text-sm">
-                      {t("stepWizard.step2.description")}
-                    </p>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                          {t("stepWizard.step2.fullName")}
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                          {t("stepWizard.step2.date") ||
+                            "Voqea sodir bo'lgan sana"}
                         </label>
                         <input
-                          type="text"
-                          value={formData.fullName}
+                          type="date"
+                          value={formData.date}
                           onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              fullName: e.target.value,
-                            })
+                            setFormData({ ...formData, date: e.target.value })
                           }
-                          className="w-full bg-[#070f17] border border-slate-800 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-cyan-500"
-                          placeholder="John Doe"
+                          className="w-full sm:w-1/2 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 focus:border-cyan-500 dark:focus:border-cyan-400 rounded-xl p-3 text-sm text-slate-900 dark:text-slate-200 focus:outline-none transition-colors shadow-sm"
                         />
                       </div>
+
                       <div>
-                        <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                          {t("stepWizard.step2.opponent")}
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                          {t("stepWizard.step2.description") ||
+                            "Vaziyatning qisqacha mazmuni"}
                         </label>
-                        <input
-                          type="text"
-                          value={formData.opponent}
+                        <textarea
+                          rows={4}
+                          value={formData.description}
                           onChange={(e) =>
                             setFormData({
                               ...formData,
-                              opponent: e.target.value,
+                              description: e.target.value,
                             })
                           }
-                          className="w-full bg-[#070f17] border border-slate-800 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-cyan-500"
+                          className="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 focus:border-cyan-500 dark:focus:border-cyan-400 rounded-xl p-3 text-sm text-slate-900 dark:text-white focus:outline-none resize-none transition-colors shadow-sm"
                           placeholder={
-                            t("stepWizard.step2.opponentPlaceholder") ||
-                            "Tashkilot nomi yoki shaxs"
+                            t("stepWizard.step2.descriptionPlaceholder") ||
+                            "Vaziyatni izchil va ketma-ketlikda tushuntirib bering..."
                           }
                         />
                       </div>
                     </div>
+                  </motion.div>
+                )}
+
+                {/* STEP 3: Dalillar */}
+                {currentStep === 3 && (
+                  <motion.div
+                    key="step3"
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
+                    transition={{ duration: 0.25 }}
+                    className="space-y-6"
+                  >
+                    <div>
+                      <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-1.5">
+                        {t("stepWizard.step3.title") || "Mavjud dalillar"}
+                      </h3>
+                      <p className="text-slate-500 dark:text-slate-400 text-sm">
+                        {t("stepWizard.step3.description") ||
+                          "Arizaga ilova qilinishi mumkin bo'lgan hujjat va tasdiqlarni tanlang"}
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {evidenceList.map((item) => {
+                        const isChecked = formData.evidences.includes(item.id);
+                        return (
+                          <div
+                            key={item.id}
+                            onClick={() => handleEvidenceToggle(item.id)}
+                            className={`p-3.5 rounded-xl border transition-all cursor-pointer flex items-center space-x-3 ${
+                              isChecked
+                                ? "border-cyan-500 dark:border-cyan-400 bg-cyan-50 dark:bg-cyan-950/30 text-slate-900 dark:text-white font-medium"
+                                : "border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/40 hover:border-slate-300 text-slate-600 dark:text-slate-400"
+                            }`}
+                          >
+                            <div
+                              className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors ${
+                                isChecked
+                                  ? "border-cyan-500 bg-cyan-500 text-white"
+                                  : "border-slate-300 dark:border-slate-700"
+                              }`}
+                            >
+                              {isChecked && (
+                                <CheckCircle2 className="w-4 h-4 stroke-[3]" />
+                              )}
+                            </div>
+                            <span className="text-sm font-semibold">
+                              {item.label}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                        {t("stepWizard.step2.date")}
+                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                        {t("stepWizard.step3.additional") ||
+                          "Qo'shimcha dalil yoki izoh"}
                       </label>
                       <input
-                        type="date"
-                        value={formData.date}
-                        onChange={(e) =>
-                          setFormData({ ...formData, date: e.target.value })
-                        }
-                        className="w-full sm:w-1/2 bg-[#070f17] border border-slate-800 rounded-lg p-3 text-sm text-slate-300 focus:outline-none focus:border-cyan-500"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                        {t("stepWizard.step2.description")}
-                      </label>
-                      <textarea
-                        rows={5}
-                        value={formData.description}
+                        type="text"
+                        value={formData.additionalEvidence}
                         onChange={(e) =>
                           setFormData({
                             ...formData,
-                            description: e.target.value,
+                            additionalEvidence: e.target.value,
                           })
                         }
-                        className="w-full bg-[#070f17] border border-slate-800 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-cyan-500 resize-none"
+                        className="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 focus:border-cyan-500 rounded-xl p-3 text-sm text-slate-900 dark:text-white focus:outline-none transition-colors shadow-sm"
                         placeholder={
-                          t("stepWizard.step2.descriptionPlaceholder") ||
-                          "Vaziyatni qisqacha tushuntirib bering..."
+                          t("stepWizard.step3.additionalPlaceholder") ||
+                          "Boshqa ma'lumotlar bo'lsa kiriting..."
                         }
                       />
-                      <p className="text-[11px] text-slate-500 mt-1">
-                        {t("stepWizard.step2.minimum")}
-                      </p>
                     </div>
-                  </div>
-                </div>
-              )}
+                  </motion.div>
+                )}
 
-              {/* STEP 3: Dalillar */}
-              {currentStep === 3 && (
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-1">
-                      {t("stepWizard.step3.title")}
+                {/* STEP 4: Natija */}
+                {currentStep === 4 && (
+                  <motion.div
+                    key="step4"
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
+                    transition={{ duration: 0.25 }}
+                    className="space-y-6"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 dark:border-slate-800 pb-3">
+                      <span className="inline-flex items-center text-xs font-bold text-cyan-600 dark:text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-3 py-1 rounded-full">
+                        <Home className="w-3.5 h-3.5 mr-1.5" />
+                        Yo'nalish:{" "}
+                        {
+                          categories.find((cat) => cat.id === formData.category)
+                            ?.title
+                        }
+                      </span>
+
+                      <span className="flex items-center text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-950 px-3 py-1 rounded-full border border-slate-200 dark:border-slate-800">
+                        <Calendar className="w-3.5 h-3.5 mr-1.5 text-slate-400" />
+                        {currentDateFormatted}
+                      </span>
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+                      {t("stepWizard.step4.title") ||
+                        "Huquqiy Tahlil va Tayyor Murojaat"}
                     </h3>
 
-                    <p className="text-slate-400 text-xs sm:text-sm">
-                      {t("stepWizard.step3.description")}
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {evidenceList.map((item) => {
-                      const isChecked = formData.evidences.includes(item.id);
-                      return (
-                        <div
-                          key={item.id}
-                          onClick={() => handleEvidenceToggle(item.id)}
-                          className={`p-4 rounded-xl border transition-all cursor-pointer flex items-center space-x-3 ${
-                            isChecked
-                              ? "border-cyan-500 bg-slate-800/80"
-                              : "border-slate-800/80 bg-slate-900/40 hover:bg-slate-800/40"
-                          }`}
-                        >
+                    {/* Qonuniy asoslar */}
+                    <div className="space-y-3 bg-slate-50 dark:bg-slate-950/80 p-4 rounded-2xl border border-slate-200 dark:border-slate-800">
+                      <h4 className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                        <ShieldAlert className="w-4 h-4 text-cyan-500" />
+                        Tavsiya etiladigan Qonuniy Asoslar
+                      </h4>
+                      <div className="space-y-2">
+                        {currentLegalInfo.laws.map((law, idx) => (
                           <div
-                            className={`w-5 h-5 rounded border flex items-center justify-center ${
-                              isChecked
-                                ? "border-cyan-500 bg-cyan-500 text-slate-950"
-                                : "border-slate-600"
-                            }`}
+                            key={idx}
+                            className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80"
                           >
-                            {isChecked && (
-                              <CheckCircle2 className="w-4 h-4 stroke-[3]" />
-                            )}
+                            <p className="font-bold text-sm text-cyan-700 dark:text-cyan-300">
+                              {law.title}
+                            </p>
+                            <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
+                              {law.desc}
+                            </p>
                           </div>
-                          <span className="text-sm font-medium text-slate-200">
-                            {item.label}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
+                        ))}
+                      </div>
 
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                      {t("stepWizard.step3.additional")}
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.additionalEvidence}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          additionalEvidence: e.target.value,
-                        })
-                      }
-                      className="w-full bg-[#070f17] border border-slate-800 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-cyan-500"
-                      placeholder={
-                        t("stepWizard.step3.additionalPlaceholder") ||
-                        "Boshqa ma'lumotlar bo'lsa kiriting..."
-                      }
-                    />
-                  </div>
-                </div>
-              )}
+                      <button
+                        onClick={() => setShowReasoning(!showReasoning)}
+                        className="inline-flex items-center text-xs font-semibold text-cyan-600 dark:text-cyan-400 hover:underline pt-1"
+                      >
+                        <ChevronDown
+                          className={`w-3.5 h-3.5 mr-1 transform transition-transform ${
+                            showReasoning ? "rotate-180" : ""
+                          }`}
+                        />
+                        Nima uchun ushbu moddalar tanlandi?
+                      </button>
 
-              {/* STEP 4: Natija */}
-              {currentStep === 4 && (
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-                    <span className="inline-flex items-center text-xs font-bold text-orange-400 bg-orange-400/10 px-2.5 py-1 rounded-md">
-                      <Home className="w-3.5 h-3.5 mr-1.5" />
-                      {categories.find((cat) => cat.id === formData.category)
-                        ?.title || "Noma'lum"}
-                    </span>
-                    {/*========================== BU yerda dinamik qilinishi kerak======================= */}
-                    <span className="text-xs text-slate-400">
-                      {t("stepWizard.step4.checkedAt")}: 2026-08-08
-                    </span>
-                  </div>
-
-                  <h3 className="text-2xl font-extrabold text-white">
-                    {t("stepWizard.step4.title")}
-                  </h3>
-
-                  {/* Qonun normasi */}
-                  <div className="space-y-3 bg-[#070f17] p-4 rounded-xl border border-slate-800">
-                    <h4 className="text-xs font-bold uppercase text-slate-400">
-                      {t("stepWizard.step4.legalNorms")}
-                    </h4>
-                    <div className="space-y-2 text-sm">
-                      {/*========================== BU yerda dinamik qilinishi kerak======================= */}
-                      <div className="p-3 rounded bg-slate-900/80 border border-slate-800">
-                        <p className="font-bold text-slate-200">
-                          11-modda — Uy-joy huquqlarini himoya qilish
+                      {showReasoning && (
+                        <p className="text-xs text-slate-600 dark:text-slate-400 p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 mt-2">
+                          Tanlangan <strong>{formData.category}</strong> sohasi
+                          va kiritgan ma'lumotlaringiz tahlil qilinib, O'zR
+                          qonunchiligidagi tegishli normalar taqdim etildi.
                         </p>
-                        <p className="text-xs text-slate-400 mt-1">
-                          Uy-joyga oid buzilgan huquqlar qonunchilikda nazarda
-                          tutilgan tartibda himoya qilinadi.
-                        </p>
+                      )}
+                    </div>
+
+                    {/* Harakat rejasi */}
+                    <div className="space-y-3 bg-slate-50 dark:bg-slate-950/80 p-4 rounded-2xl border border-slate-200 dark:border-slate-800">
+                      <h4 className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400">
+                        Ketma-ket Harakat Rejasi
+                      </h4>
+                      <ol className="space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+                        {currentLegalInfo.actions.map((act, i) => (
+                          <li key={i} className="flex items-start space-x-2.5">
+                            <span className="bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 font-bold px-2 py-0.5 rounded text-xs border border-cyan-500/20">
+                              {i + 1}
+                            </span>
+                            <span>{act}</span>
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+
+                    {/* Preview Text */}
+                    <div className="space-y-2">
+                      <h4 className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400">
+                        Tayyor Ariza Matni
+                      </h4>
+                      <div className="bg-slate-100 dark:bg-slate-950 p-4 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-mono text-slate-800 dark:text-slate-300 max-h-36 overflow-y-auto leading-relaxed whitespace-pre-wrap">
+                        {generateAppealText()}
                       </div>
                     </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
-                    <button
-                      onClick={() => setShowReasoning(!showReasoning)}
-                      className="inline-flex items-center text-xs text-cyan-400 pt-1"
-                    >
-                      <ChevronDown
-                        className={`w-3.5 h-3.5 mr-1 transform transition-transform ${showReasoning ? "rotate-180" : ""}`}
-                      />
-                      {t("stepWizard.step4.whyTheseLaws")}
-                    </button>
-                  </div>
-
-                  {/*========================== BU yerda dinamik qilinishi kerak======================= */}
-                  {/* Harakat rejasi */}
-                  <div className="space-y-3 bg-[#070f17] p-4 rounded-xl border border-slate-800">
-                    <h4 className="text-xs font-bold uppercase text-slate-400">
-                      {t("stepWizard.step4.actionPlan")}
-                    </h4>
-                    <ol className="space-y-2 text-xs sm:text-sm text-slate-300">
-                      <li className="flex items-start space-x-2">
-                        <span className="bg-cyan-500/20 text-cyan-400 font-bold px-2 py-0.5 rounded text-xs">
-                          1
-                        </span>
-                        <span>
-                          {formData.date || "Voqea sanasi"} holati bo'yicha{" "}
-                          {formData.opponent || "qarshi tomonga"} yozma ariza
-                          yuboring.
-                        </span>
-                      </li>
-                      <li className="flex items-start space-x-2">
-                        <span className="bg-cyan-500/20 text-cyan-400 font-bold px-2 py-0.5 rounded text-xs">
-                          2
-                        </span>
-                        <span>
-                          11-moddaga tayangan holda talabingizni aniq yozing.
-                        </span>
-                      </li>
-                    </ol>
-                  </div>
-
-                  {/* Tayyor murojaat matni preview */}
-                  <div className="space-y-2">
-                    <h4 className="text-xs font-bold uppercase text-slate-400">
-                      {t("stepWizard.navigation.readyText")}
-                    </h4>
-                    <div className="bg-[#070f17] p-4 rounded-xl border border-slate-800 text-xs font-mono text-slate-300 max-h-36 overflow-y-auto leading-relaxed whitespace-pre-wrap">
-                      {generateAppealText()}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Bottom Navigation */}
-              <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-800/80 mt-6">
+              {/* Navigation Controls */}
+              <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-200 dark:border-slate-800 mt-6">
                 <Button
                   onClick={handleBack}
                   disabled={currentStep === 1}
                   variant="outline"
-                  className="border-slate-800 bg-slate-900/60 hover:bg-slate-800 text-slate-300 rounded-lg px-5 disabled:opacity-30"
+                  className="border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl px-5 disabled:opacity-30"
                 >
-                  ← Orqaga
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Orqaga
                 </Button>
 
                 <div className="flex items-center gap-3 ml-auto">
                   <Button
                     onClick={() => setIsModalOpen(true)}
                     variant="outline"
-                    className="border-slate-700 bg-slate-800/80 hover:bg-slate-800 text-slate-200 text-xs sm:text-sm py-5 rounded-lg"
+                    className="border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/80 text-slate-800 dark:text-slate-200 text-xs sm:text-sm py-5 rounded-xl"
                   >
-                    {t("stepWizard.navigation.readyText")}
+                    <FileText className="w-4 h-4 mr-2" />
+                    Matnni Ko'rish
                   </Button>
 
                   {currentStep < 4 ? (
                     <Button
                       onClick={handleNext}
-                      className="bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold px-6 py-5 rounded-lg shadow-md transition-all"
+                      className="bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-600 hover:opacity-95 text-white font-bold px-6 py-5 rounded-xl shadow-lg shadow-cyan-500/20 transition-all"
                     >
-                      {t("stepWizard.navigation.continue")} →
+                      <span>
+                        {t("stepWizard.navigation.continue") || "Davom etish"}
+                      </span>
+                      <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
                   ) : (
                     <Button
                       onClick={() => setIsModalOpen(true)}
-                      className="bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold px-6 py-5 rounded-lg shadow-md transition-all"
+                      className="bg-gradient-to-r from-emerald-500 via-cyan-500 to-indigo-600 hover:opacity-95 text-white font-bold px-6 py-5 rounded-xl shadow-lg shadow-cyan-500/25 transition-all"
                     >
-                      {t("stepWizard.navigation.viewAndCopy")}
+                      <Sparkles className="w-4 h-4 mr-2" />
+                      {t("stepWizard.navigation.viewAndCopy") ||
+                        "Arizani Olish"}
                     </Button>
                   )}
                 </div>
@@ -684,64 +913,70 @@ Eslatma: faktlar, organ vakolati va talablarni yuborishdan oldin tekshiring.`;
         </div>
       </section>
 
-      {/* MODAL COMPONENT */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-2xl bg-[#0e1a26] border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden text-slate-100 flex flex-col max-h-[90vh]">
-            {/* Modal Header */}
-            <div className="p-6 pb-2 flex items-start justify-between">
-              <div>
-                <p className="text-[11px] font-bold tracking-widest text-teal-400 uppercase mb-1">
-                  {t("stepWizard.generatedResult")}
-                </p>
-                <h3 className="text-2xl font-extrabold text-white">
-                  {t("stepWizard.appealText")}
-                </h3>
-                <p className="text-xs text-slate-400 mt-1">
-                  {t("stepWizard.appealTextDescription")}
-                </p>
+      {/* Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ duration: 0.2 }}
+              className="relative w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl overflow-hidden text-slate-900 dark:text-slate-100 flex flex-col max-h-[90vh]"
+            >
+              <div className="p-6 pb-3 flex items-start justify-between border-b border-slate-200 dark:border-slate-800">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-widest text-emerald-600 dark:text-emerald-400 uppercase mb-1">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>Tayyor Hujjat</span>
+                  </div>
+                  <h3 className="text-2xl font-black text-slate-900 dark:text-white">
+                    Rasmiy Murojaat Matni
+                  </h3>
+                </div>
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-full bg-slate-100 dark:bg-slate-800 transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
               </div>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="p-1.5 text-slate-400 hover:text-white rounded-full bg-slate-800/60 hover:bg-slate-800 transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
 
-            {/* Modal Content - Scrollable Text */}
-            <div className="p-6 py-2 flex-1 overflow-y-auto">
-              <div className="p-4 bg-[#070f17] rounded-xl border border-slate-800 text-xs sm:text-sm font-sans text-slate-200 whitespace-pre-wrap leading-relaxed select-text shadow-inner">
-                {generateAppealText()}
+              <div className="p-6 flex-1 overflow-y-auto">
+                <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-mono text-slate-800 dark:text-slate-200 whitespace-pre-wrap leading-relaxed select-text shadow-inner">
+                  {generateAppealText()}
+                </div>
               </div>
-            </div>
 
-            {/* Modal Footer - Buttons */}
-            <div className="p-6 pt-3 border-t border-slate-800/80 flex flex-wrap items-center gap-3">
-              <Button
-                onClick={handleCopyText}
-                className="bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold text-xs sm:text-sm px-5 py-5 rounded-lg shadow transition-all"
-              >
-                {copied ? t("stepWizard.copied") : t("stepWizard.copyText")}
-              </Button>
-              <Button
-                onClick={handleDownloadWord}
-                variant="outline"
-                className="border-slate-700 bg-slate-800 hover:bg-slate-700 text-white text-xs sm:text-sm px-4 py-5 rounded-lg transition-all"
-              >
-                Word (.doc)
-              </Button>
-              <Button
-                onClick={handleDownloadPDF}
-                variant="outline"
-                className="border-slate-700 bg-slate-800 hover:bg-slate-700 text-white text-xs sm:text-sm px-4 py-5 rounded-lg transition-all"
-              >
-                PDF yuklash
-              </Button>
-            </div>
+              <div className="p-6 pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center gap-3 bg-slate-50/50 dark:bg-slate-950/40">
+                <Button
+                  onClick={handleCopyText}
+                  className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm px-5 py-5 rounded-xl shadow transition-all flex items-center gap-2"
+                >
+                  <Copy className="w-4 h-4" />
+                  <span>{copied ? "Nusxalandi!" : "Nusxa olish"}</span>
+                </Button>
+                <Button
+                  onClick={handleDownloadWord}
+                  variant="outline"
+                  className="border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 text-xs sm:text-sm px-4 py-5 rounded-xl transition-all flex items-center gap-2"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Word (.doc)</span>
+                </Button>
+                <Button
+                  onClick={handleDownloadPDF}
+                  variant="outline"
+                  className="border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 text-xs sm:text-sm px-4 py-5 rounded-xl transition-all flex items-center gap-2"
+                >
+                  <Printer className="w-4 h-4" />
+                  <span>PDF Yuklash</span>
+                </Button>
+              </div>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </>
   );
 }

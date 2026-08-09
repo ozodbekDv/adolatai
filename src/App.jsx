@@ -15,6 +15,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "./app/features/userSlice";
 
 import { useEffect, useState } from "react";
+import { AssistantPage } from "./pages/AssistantPage";
+import Advocates from "./pages/Advocates";
+import AdvocateProfile from "./pages/AdvocateProfile";
+import { ProfilePage } from "./pages/ProfilePage";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +62,22 @@ export function App() {
         {
           index: true,
           element: <HomePage />,
+        },
+        {
+          path: "/aiChat",
+          element: <AssistantPage />,
+        },
+        {
+          path: "/advocates",
+          element: <Advocates />,
+        },
+        {
+          path: "/advocates/:id",
+          element: <AdvocateProfile />,
+        },
+        {
+          path: "/profile",
+          element: <ProfilePage />,
         },
       ],
     },

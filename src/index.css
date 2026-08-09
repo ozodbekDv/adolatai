@@ -19,9 +19,16 @@ body {
     sans-serif;
 }
 
+body {
+  @apply dark:bg-[#020617] text-slate-100 min-h-screen;
+  /* yoki bg-slate-950 */
+}
+
 html {
   overflow-y: scroll;
   scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Header balandligi */
 }
 
 @theme inline {

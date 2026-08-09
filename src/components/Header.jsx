@@ -1,6 +1,14 @@
 import React, { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Moon, Sun, Check, User, LogOut } from "lucide-react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import {
+  Moon,
+  Sun,
+  Check,
+  User,
+  LogOut,
+  ChevronDown,
+  Menu,
+} from "lucide-react";
 import { AppContext } from "../context/AppContext";
 import { useI18n } from "../hooks/useI18n";
 
@@ -27,7 +35,9 @@ export const Header = () => {
   const { darkMode, setDarkMode } = useContext(AppContext);
   const { t, lang, setLang } = useI18n();
   const navigate = useNavigate();
+  const location = useLocation();
 
+  // Foydalanuvchi ma'lumotlari
   const user = JSON.parse(localStorage.getItem("currentUser")) || {
     name: "John",
     email: "john@example.com",
@@ -35,7 +45,10 @@ export const Header = () => {
 
   const userInitial = user.name ? user.name.charAt(0).toUpperCase() : "U";
 
-  // Til o'zgarganda chaqiriladigan maxsus funksiya
+  // Bosh sahifada ekanligini aniqlash
+  const isHomePage = location.pathname === "/";
+
+  // Til o'zgarganda chaqiriladigan funksiya
   const handleLanguageChange = (newLang) => {
     if (setLang) {
       setLang(newLang);
@@ -48,8 +61,8 @@ export const Header = () => {
   };
 
   return (
-    <header className="w-full fixed z-50 bg-[#f4f5f7] dark:bg-[#0f172a] border-b border-gray-200 dark:border-gray-800 py-2.5 px-6 transition-colors duration-200">
-      <div className="max-w-[1400px] w-full mx-auto flex justify-between items-center">
+    <header className="w-full fixed z-50 bg-[#f7f8fa] dark:bg-[#0f172a] border-b border-gray-200 dark:border-gray-800 py-2.5 px-6 transition-colors duration-200">
+      <div className="max-w-[1200px] w-full mx-auto flex justify-between items-center">
         {/* LOGO VA SARLAVHA */}
         <div className="flex items-center space-x-3">
           <Link to="/" className="flex items-center space-x-3">
@@ -61,49 +74,77 @@ export const Header = () => {
               <span className="text-xl font-bold tracking-tight text-[#0f2338] dark:text-white">
                 ADOLAT
               </span>
-              <span className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 max-w-[90px] leading-tight">
+              {/* <span className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 max-w-[90px] leading-tight">
                 {t("header.subtitle") || "HUQUQIY YORDAMCHI"}
-              </span>
+              </span> */}
             </div>
           </Link>
         </div>
 
-        {/* NAVIGATSIYA BO'LIMI (t() funksiyasi bilan tarjima qilindi) */}
-        <nav className="hidden lg:flex items-center space-x-8 font-semibold text-[#0f2338] dark:text-gray-200">
+        {/* NAVIGATSIYA BO'LIMI */}
+        <div className="flex items-center space-x-6 font-semibold text-[#0f2338] dark:text-gray-200">
+          {/* Faqat Bosh sahifada ("/") ko'rinadigan Dropdown menyu */}
+          {isHomePage && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className="flex items-center space-x-1.5 font-bold text-base hover:bg-gray-200 dark:hover:bg-slate-800 rounded-xl px-3 py-2 transition-colors"
+                >
+                  <span>{t("header.sections") || "Sahifada"}</span>
+                  <ChevronDown className="h-4 w-4 text-gray-500" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="center" className="w-48 mt-1">
+                <DropdownMenuItem asChild className="cursor-pointer">
+                  <a href="#stages" className="w-full font-medium">
+                    {t("header.assistant") || "Yordamchi"}
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild className="cursor-pointer">
+                  <a href="#knowledge" className="w-full font-medium">
+                    {t("header.knowledge") || "Huquqiy baza"}
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild className="cursor-pointer">
+                  <a href="#cases" className="w-full font-medium">
+                    {t("header.cases") || "Murojaatlarim"}
+                  </a>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
+
+          {/* AI Chat tugmasi barcha sahifalarda ko'rinadi */}
           <Link
-            to="/assistant"
-            className="text-base hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            to="/aiChat"
+            className="hidden sm:inline-block text-base hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           >
-            {t("header.assistant") || "Yordamchi"}
+            {t("header.aiChat") || "AI Chat"}
           </Link>
           <Link
-            to="/knowledge"
-            className="text-base leading-tight hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-center"
+            to="/advocates"
+            className="hidden sm:inline-block text-base hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           >
-            {t("header.knowledge") || "Huquqiy baza"}
+            Advokatlar
+            {/* {t("header.advocates") || "Advokatlar"} */}
           </Link>
-          <Link
-            to="/cases"
-            className="text-base hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-          >
-            {t("header.cases") || "Murojaatlarim"}
-          </Link>
-        </nav>
+        </div>
 
         {/* O'NG TARAF */}
         <div className="flex items-center space-x-3 md:space-x-4">
-          {/* Status Badge'lar */}
+          {/* Status Badge */}
           <div className="hidden md:flex items-center space-x-2">
             <Badge
               variant="outline"
-              className="bg-white dark:bg-slate-800 text-[#0f2338] dark:text-gray-200 border-gray-300 dark:border-gray-700 font-bold py-1.5 px-3 py-4 rounded-full flex items-center space-x-1.5 text-sm shadow-sm"
+              className="bg-white dark:bg-slate-800 text-[#0f2338] dark:text-gray-200 border-gray-300 dark:border-gray-700 font-bold px-3 py-1.5 rounded-full flex items-center space-x-1.5 text-sm shadow-sm"
             >
               <span className="text-amber-500">🔒</span>
               <span>{t("header.savedOnDevice") || "Qurilmada saqlanadi"}</span>
             </Badge>
           </div>
 
-          {/* TIL TANLASH (To'g'rilangan Select) */}
+          {/* TIL TANLASH SELECT */}
           <Select value={lang} onValueChange={handleLanguageChange}>
             <SelectTrigger className="w-[80px] bg-white dark:bg-slate-800 border-gray-300 dark:border-gray-700 text-[#0f2338] dark:text-white font-bold h-9 rounded-xl focus:ring-0 shadow-sm">
               <SelectValue placeholder={lang ? lang.toUpperCase() : "UZ"} />
@@ -118,7 +159,6 @@ export const Header = () => {
               >
                 UZCrl
               </SelectItem>
-
               <SelectItem value="ru" className="font-semibold cursor-pointer">
                 RU
               </SelectItem>
@@ -155,7 +195,7 @@ export const Header = () => {
                     {userInitial}
                   </AvatarFallback>
                 </Avatar>
-                <span className="font-bold text-base text-[#0f2338] dark:text-white">
+                <span className="font-bold text-base text-[#0f2338] dark:text-white hidden sm:inline-block">
                   {user.name}
                 </span>
               </div>

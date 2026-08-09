@@ -13,6 +13,8 @@ export const translations = {
       theme: "Mavzu",
       subtitle: "HUQUQIY YORDAMCHI",
       savedOnDevice: "Qurilmada saqlanadi",
+      sections: "Sahifada",
+      aiChat: "AI Chat",
     },
 
     hero: {
@@ -235,6 +237,8 @@ export const translations = {
       theme: "Мавзу",
       subtitle: "ҲУҚУҚИЙ ЁРДАМЧИ",
       savedOnDevice: "Қурилмада сақланади",
+      sections: "Саҳифада",
+      aiChat: "AI чат",
     },
 
     hero: {
@@ -472,6 +476,8 @@ export const translations = {
       theme: "Тема",
       subtitle: "ПРАВОВОЙ ПОМОЩНИК",
       savedOnDevice: "Сохраняется на устройстве",
+      sections: "На странице",
+      aiChat: "AI чат",
     },
 
     hero: {
@@ -697,6 +703,8 @@ export const translations = {
       theme: "Theme",
       subtitle: "LEGAL ASSISTANT",
       savedOnDevice: "Saved on this device",
+      sections: "On this page",
+      aiChat: "AI chat",
     },
 
     hero: {
