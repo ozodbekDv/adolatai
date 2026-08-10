@@ -386,7 +386,7 @@ ${date}: ${currentDateFormatted}             ${signature}: __________`;
     <>
       <section
         id="stages"
-        className="w-full py-12 px-4 md:px-12 lg:px-20 border-t border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 relative overflow-hidden transition-colors duration-300"
+        className="w-full py-8 sm:py-12 px-3 sm:px-4 md:px-12 lg:px-20 border-t border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 relative overflow-hidden transition-colors duration-300"
       >
         {/* Glow orqa foni */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-cyan-500/20 via-emerald-500/10 to-indigo-500/20 blur-[130px] pointer-events-none rounded-full" />
@@ -401,7 +401,7 @@ ${date}: ${currentDateFormatted}             ${signature}: __________`;
                   {t("stepWizard.headerLabel") || "AI Huquqiy Constructor"}
                 </span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
                 {t("stepWizard.headerTitle") || "Huquqiy Murojaat Yaratish"}
               </h2>
             </div>
@@ -418,7 +418,7 @@ ${date}: ${currentDateFormatted}             ${signature}: __________`;
           {/* Main Card */}
           <div className="grid grid-cols-1 lg:grid-cols-12 rounded-3xl overflow-hidden border border-slate-200/80 dark:border-slate-800/80 shadow-xl dark:shadow-2xl bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl">
             {/* Sidebar: Progress & Navigation */}
-            <div className="lg:col-span-3 bg-slate-100/70 dark:bg-slate-950/80 p-6 md:p-8 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800/80 flex flex-col justify-between">
+            <div className="lg:col-span-3 bg-slate-100/70 dark:bg-slate-950/80 p-4 sm:p-6 md:p-8 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800/80 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between text-xs font-bold text-slate-500 dark:text-slate-400 mb-2">
                   <span>
@@ -486,7 +486,7 @@ ${date}: ${currentDateFormatted}             ${signature}: __________`;
                           )}
 
                           <div
-                            className={`w-10 h-10 rounded-xl flex items-center justify-center text-xs font-bold transition-all duration-300 shadow-sm ${
+                            className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center text-xs font-bold transition-all duration-300 shadow-sm ${
                               isDone
                                 ? "bg-emerald-500 text-white shadow-emerald-500/20"
                                 : isActive
@@ -535,7 +535,7 @@ ${date}: ${currentDateFormatted}             ${signature}: __________`;
             </div>
 
             {/* Content Column */}
-            <div className="lg:col-span-9 p-6 md:p-10 flex flex-col justify-between min-h-[520px]">
+            <div className="lg:col-span-9 p-4 sm:p-6 md:p-10 flex flex-col justify-between min-h-[520px]">
               <AnimatePresence mode="wait">
                 {/* STEP 1: Yo'nalish */}
                 {currentStep === 1 && (
@@ -558,7 +558,7 @@ ${date}: ${currentDateFormatted}             ${signature}: __________`;
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                       {categories.map((cat) => {
                         const Icon = cat.icon;
                         const isSelected = formData.category === cat.id;
@@ -569,7 +569,7 @@ ${date}: ${currentDateFormatted}             ${signature}: __________`;
                             onClick={() =>
                               setFormData({ ...formData, category: cat.id })
                             }
-                            className={`p-4 rounded-2xl border transition-all duration-200 cursor-pointer flex flex-col justify-between space-y-3 group ${
+                            className={`p-3 sm:p-4 rounded-2xl border transition-all duration-200 cursor-pointer flex flex-col justify-between space-y-3 group ${
                               isSelected
                                 ? "border-cyan-500 dark:border-cyan-400 bg-cyan-50/80 dark:bg-cyan-950/30 shadow-lg shadow-cyan-500/10 ring-2 ring-cyan-500/50"
                                 : "border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-950/40 hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-md"
@@ -586,10 +586,10 @@ ${date}: ${currentDateFormatted}             ${signature}: __________`;
                               )}
                             </div>
                             <div>
-                              <h4 className="font-bold text-slate-900 dark:text-white text-base">
+                              <h4 className="font-bold text-slate-900 dark:text-white text-sm sm:text-base">
                                 {cat.title}
                               </h4>
-                              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                              <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
                                 {cat.subtitle}
                               </p>
                             </div>
@@ -724,14 +724,14 @@ ${date}: ${currentDateFormatted}             ${signature}: __________`;
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                       {evidenceList.map((item) => {
                         const isChecked = formData.evidences.includes(item.id);
                         return (
                           <div
                             key={item.id}
                             onClick={() => handleEvidenceToggle(item.id)}
-                            className={`p-3.5 rounded-xl border transition-all cursor-pointer flex items-center space-x-3 ${
+                            className={`p-2.5 sm:p-3.5 rounded-xl border transition-all cursor-pointer flex items-center space-x-3 ${
                               isChecked
                                 ? "border-cyan-500 dark:border-cyan-400 bg-cyan-50 dark:bg-cyan-950/30 text-slate-900 dark:text-white font-medium"
                                 : "border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/40 hover:border-slate-300 text-slate-600 dark:text-slate-400"
@@ -748,7 +748,7 @@ ${date}: ${currentDateFormatted}             ${signature}: __________`;
                                 <CheckCircle2 className="w-4 h-4 stroke-[3]" />
                               )}
                             </div>
-                            <span className="text-sm font-semibold">
+                            <span className="text-xs sm:text-sm font-semibold">
                               {item.label}
                             </span>
                           </div>
@@ -876,7 +876,7 @@ ${date}: ${currentDateFormatted}             ${signature}: __________`;
                       <h4 className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400">
                         {t("stepWizard.step4.readyAppeal")}
                       </h4>
-                      <div className="bg-slate-100 dark:bg-slate-950 p-4 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-mono text-slate-800 dark:text-slate-300 max-h-36 overflow-y-auto leading-relaxed whitespace-pre-wrap">
+                      <div className="bg-slate-100 dark:bg-slate-950 p-3 sm:p-4 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-mono text-slate-800 dark:text-slate-300 max-h-32 sm:max-h-36 overflow-y-auto leading-relaxed whitespace-pre-wrap">
                         {generateAppealText()}
                       </div>
                     </div>
@@ -890,7 +890,7 @@ ${date}: ${currentDateFormatted}             ${signature}: __________`;
                   onClick={handleBack}
                   disabled={currentStep === 1}
                   variant="outline"
-                  className="border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl px-5 disabled:opacity-30"
+                  className="border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl px-4 sm:px-5 disabled:opacity-30"
                 >
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   {t("stepWizard.navigation.back") || "Orqaga"}
@@ -900,7 +900,7 @@ ${date}: ${currentDateFormatted}             ${signature}: __________`;
                   <Button
                     onClick={() => setIsModalOpen(true)}
                     variant="outline"
-                    className="border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/80 text-slate-800 dark:text-slate-200 text-xs sm:text-sm py-5 rounded-xl"
+                    className="border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/80 text-slate-800 dark:text-slate-200 text-xs sm:text-sm py-4 sm:py-5 rounded-xl"
                   >
                     <FileText className="w-4 h-4 mr-2" />
                     {t("stepWizard.navigation.readyText") || "Matnni Ko'rish"}
@@ -909,7 +909,7 @@ ${date}: ${currentDateFormatted}             ${signature}: __________`;
                   {currentStep < 4 ? (
                     <Button
                       onClick={handleNext}
-                      className="bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-600 hover:opacity-95 text-white font-bold px-6 py-5 rounded-xl shadow-lg shadow-cyan-500/20 transition-all"
+                      className="bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-600 hover:opacity-95 text-white font-bold px-4 sm:px-6 py-4 sm:py-5 rounded-xl shadow-lg shadow-cyan-500/20 transition-all"
                     >
                       <span>
                         {t("stepWizard.navigation.continue") || "Davom etish"}
@@ -919,7 +919,7 @@ ${date}: ${currentDateFormatted}             ${signature}: __________`;
                   ) : (
                     <Button
                       onClick={() => setIsModalOpen(true)}
-                      className="bg-gradient-to-r from-emerald-500 via-cyan-500 to-indigo-600 hover:opacity-95 text-white font-bold px-6 py-5 rounded-xl shadow-lg shadow-cyan-500/25 transition-all"
+                      className="bg-gradient-to-r from-emerald-500 via-cyan-500 to-indigo-600 hover:opacity-95 text-white font-bold px-4 sm:px-6 py-4 sm:py-5 rounded-xl shadow-lg shadow-cyan-500/25 transition-all"
                     >
                       <Sparkles className="w-4 h-4 mr-2" />
                       {t("stepWizard.navigation.viewAndCopy") ||

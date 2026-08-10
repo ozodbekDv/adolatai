@@ -803,6 +803,24 @@ export const translations = {
       emptyDesc: "Жараён охирида «Мурожаатни сақлаш» тугмасини босинг.",
     },
 
+    profilePage: {
+      badge: "Фойдаланувчи профили",
+      edit: "Таҳрирлаш",
+      save: "Сақлаш",
+      cancel: "Бекор қилиш",
+      personalInfo: "Шахсий маълумотлар",
+      fullName: "Тўлиқ исм",
+      email: "Email манзил",
+      phone: "Телефон рақами",
+      occupation: "Мутахассислик / фаолият",
+      bio: "Ўзи ҳақида (bio)",
+      education: "Таълим ва тил билиши",
+      educationStage: "Босқич:",
+      englishLevel: "Инглиз тили даражаси:",
+      skillsTitle: "Техник кўникмалар",
+      toastSuccess: "Профил маълумотлари муваффақиятли сақланди!",
+    },
+
     advocatesPage: {
       header: {
         title: "Профессионал",
@@ -1281,6 +1299,24 @@ export const translations = {
       emptyDesc: "Нажмите «Сохранить обращение» в конце процесса.",
     },
 
+    profilePage: {
+      badge: "Профиль пользователя",
+      edit: "Редактировать",
+      save: "Сохранить",
+      cancel: "Отмена",
+      personalInfo: "Личные данные",
+      fullName: "Полное имя",
+      email: "Email",
+      phone: "Телефон",
+      occupation: "Специальность / деятельность",
+      bio: "О себе (bio)",
+      education: "Образование и языки",
+      educationStage: "Уровень:",
+      englishLevel: "Уровень английского:",
+      skillsTitle: "Технические навыки",
+      toastSuccess: "Данные профиля успешно сохранены!",
+    },
+
     advocatesPage: {
       header: {
         title: "Профессиональные",
@@ -1756,6 +1792,24 @@ export const translations = {
       clearAll: "Clear all",
       emptyTitle: "No saved appeals yet.",
       emptyDesc: "Click “Save appeal” at the end of the process.",
+    },
+
+    profilePage: {
+      badge: "User profile",
+      edit: "Edit",
+      save: "Save",
+      cancel: "Cancel",
+      personalInfo: "Personal information",
+      fullName: "Full name",
+      email: "Email address",
+      phone: "Phone number",
+      occupation: "Profession / activity",
+      bio: "About me (bio)",
+      education: "Education & languages",
+      educationStage: "Stage:",
+      englishLevel: "English level:",
+      skillsTitle: "Technical skills",
+      toastSuccess: "Profile information was saved successfully!",
     },
 
     advocatesPage: {

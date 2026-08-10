@@ -157,7 +157,7 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   placeholder="Aziz"
                   required
-                  className="h-10 rounded-lg border-slate-200 text-sm focus-visible:ring-[#0F2942]"
+                  className="h-10 rounded-lg border-slate-200 bg-white dark:bg-slate-900 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus-visible:ring-[#0F2942]"
                 />
               </div>
 
@@ -174,7 +174,7 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   placeholder="Karimov"
                   required
-                  className="h-10 rounded-lg border-slate-200 text-sm focus-visible:ring-[#0F2942]"
+                  className="h-10 rounded-lg border-slate-200 bg-white dark:bg-slate-900 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus-visible:ring-[#0F2942]"
                 />
               </div>
             </div>
@@ -202,7 +202,7 @@ export default function RegisterPage() {
                   type="tel"
                   placeholder="90 123 45 67"
                   required
-                  className="pl-16 h-10 w-full rounded-lg border border-slate-200 text-sm font-medium tracking-wide focus-visible:ring-[#0F2942]"
+                  className="pl-16 h-10 w-full rounded-lg border border-slate-200 bg-white dark:bg-slate-900 text-sm font-medium tracking-wide text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus-visible:ring-[#0F2942]"
                 />
               </div>
             </div>
@@ -223,7 +223,7 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   placeholder="••••••••"
                   required
-                  className="pr-10 h-10 rounded-lg border-slate-200 text-sm focus-visible:ring-[#0F2942]"
+                  className="pr-10 h-10 rounded-lg border-slate-200 bg-white dark:bg-slate-900 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus-visible:ring-[#0F2942]"
                 />
                 <button
                   type="button"
@@ -256,7 +256,7 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   placeholder="••••••••"
                   required
-                  className={`pr-10 h-10 rounded-lg text-sm focus-visible:ring-[#0F2942] ${
+                  className={`pr-10 h-10 rounded-lg bg-white dark:bg-slate-900 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus-visible:ring-[#0F2942] ${
                     passwordError
                       ? "border-red-500 focus-visible:ring-red-500"
                       : "border-slate-200"

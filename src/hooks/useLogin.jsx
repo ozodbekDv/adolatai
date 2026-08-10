@@ -14,10 +14,12 @@ export const useLogin = () => {
     setIsPending(true);
 
     try {
-      // Ro'yxatdan o'tgan barcha userlar
-      const savedUsers = localStorage.getItem("currentUser");
+      const existingUser = JSON.parse(
+        localStorage.getItem("currentUser") || "null",
+      );
 
       const newUser = {
+        ...(existingUser || {}),
         phone,
         password,
       };
@@ -30,6 +32,7 @@ export const useLogin = () => {
 
       // Login session
       localStorage.setItem("currentUser", JSON.stringify(newUser));
+      localStorage.setItem("user", JSON.stringify(newUser));
 
       toast.success("Muvaffaqiyatli kirdingiz");
 

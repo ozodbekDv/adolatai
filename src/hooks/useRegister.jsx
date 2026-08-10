@@ -14,7 +14,11 @@ export const useRegister = () => {
     setIsPending(true);
 
     try {
+      const existingUser = JSON.parse(
+        localStorage.getItem("currentUser") || "null",
+      );
       const newUser = {
+        ...(existingUser || {}),
         id: crypto.randomUUID(),
         phone,
         password,
@@ -29,6 +33,7 @@ export const useRegister = () => {
       setUser(newUser);
 
       // LocalStorage'ga yangi userni saqlash
+      localStorage.setItem("currentUser", JSON.stringify(newUser));
       localStorage.setItem("user", JSON.stringify(newUser));
 
       toast.success("Muvaffaqiyatli ro'yxatdan o'tdingiz");

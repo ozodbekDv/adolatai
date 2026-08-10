@@ -93,8 +93,8 @@ function HomePage() {
       <div className="absolute top-[70%] -left-20 w-[600px] h-[600px] bg-teal-500/10 blur-3xl pointer-events-none -z-10 rounded-full" />
 
       {/* 1. HERO SECTION */}
-      <section className="relative w-full min-h-[85vh] flex items-center justify-center py-20 px-6 md:px-12 lg:px-24">
-        <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <section className="relative w-full min-h-[85vh] flex items-center justify-center py-14 px-4 sm:px-6 md:px-12 lg:px-24">
+        <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
           <motion.div
             className="lg:col-span-7 flex flex-col space-y-6"
             initial="hidden"
@@ -113,7 +113,7 @@ function HomePage() {
 
             <motion.h1
               variants={fadeInUp}
-              className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight"
+              className="text-3xl sm:text-4xl lg:text-6xl font-black leading-tight tracking-tight"
             >
               <span className="text-foreground">{t("hero.titlePart1")}</span>{" "}
               <br />
@@ -135,7 +135,7 @@ function HomePage() {
             >
               <a
                 href="#stages"
-                className="group relative inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-slate-950 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 bg-[length:200%_auto] hover:bg-right rounded-xl shadow-lg shadow-amber-500/20 hover:shadow-amber-500/35 hover:scale-[1.02] active:scale-95 transition-all duration-300"
+                className="group relative inline-flex items-center justify-center px-6 sm:px-8 py-3 text-sm sm:text-base font-bold text-slate-950 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 bg-[length:200%_auto] hover:bg-right rounded-xl shadow-lg shadow-amber-500/20 hover:shadow-amber-500/35 hover:scale-[1.02] active:scale-95 transition-all duration-300"
               >
                 <span>{t("hero.btnPrimary")}</span>
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1.5 transition-transform duration-200" />
@@ -143,7 +143,7 @@ function HomePage() {
 
               <a
                 href="#steps"
-                className="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-foreground border border-slate-200 dark:border-slate-800 rounded-xl bg-background/50 backdrop-blur-md hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:scale-[1.02] active:scale-95 transition-all duration-200 shadow-sm"
+                className="inline-flex items-center justify-center px-6 sm:px-8 py-3 text-sm sm:text-base font-semibold text-foreground border border-slate-200 dark:border-slate-800 rounded-xl bg-background/50 backdrop-blur-md hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:scale-[1.02] active:scale-95 transition-all duration-200 shadow-sm"
               >
                 {t("hero.btnSecondary")}
               </a>
@@ -152,14 +152,12 @@ function HomePage() {
 
           <motion.div
             className="lg:col-span-5 flex justify-center lg:justify-end"
-            initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
-            animate={{ opacity: 1, scale: 1, rotate: -2 }}
-            whileHover={{ rotate: 0, scale: 1.02 }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
-            <Card className="w-full max-w-md bg-white/70 dark:bg-slate-900/70 border-slate-200/80 dark:border-slate-800/80 shadow-2xl rounded-3xl p-3 backdrop-blur-xl relative group overflow-hidden">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-teal-500 via-emerald-500 to-amber-500 rounded-3xl opacity-20 group-hover:opacity-50 transition duration-500 blur-md -z-10" />
-              <CardContent className="p-6 space-y-6">
+            <Card className="w-full max-w-md bg-white dark:bg-slate-900 border-slate-200/80 dark:border-slate-800/80 shadow-[0px_0px_45px_20px_rgba(0,0,0,0.08)] dark:shadow-[0px_0px_45px_20px_rgba(0,0,0,0.4)] rounded-3xl p-3 relative group overflow-hidden">
+              <CardContent className="p-4 sm:p-6 space-y-6">
                 <div className="flex items-center space-x-2">
                   <span className="relative flex h-3 w-3">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -193,7 +191,7 @@ function HomePage() {
       {/* 2. STEP WIZARD SECTION */}
       <StepWizard />
 
-      <div className="w-full max-w-7xl mx-auto space-y-28 px-6 md:px-12 py-16">
+      <div className="w-full max-w-7xl mx-auto space-y-20 sm:space-y-28 px-4 sm:px-6 md:px-12 py-12 sm:py-16">
         {/* 1-BO‘LIM: 01-04 QADAMLAR PANELI */}
         <section id="steps" className="space-y-12">
           <motion.div
@@ -224,7 +222,7 @@ function HomePage() {
                 key={step.id}
                 variants={fadeInUp}
                 whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                className="p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/60 dark:bg-slate-900/40 backdrop-blur-md shadow-sm hover:shadow-2xl dark:hover:border-teal-500/40 transition-all duration-300 relative group overflow-hidden"
+                className="p-4 sm:p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/60 dark:bg-slate-900/40 backdrop-blur-md shadow-sm hover:shadow-2xl dark:hover:border-teal-500/40 transition-all duration-300 relative group overflow-hidden"
               >
                 <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-teal-500/10 via-amber-500/5 to-transparent rounded-bl-full group-hover:scale-125 transition-transform duration-500" />
                 <span className="text-4xl font-black text-transparent bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text font-mono">
@@ -278,7 +276,7 @@ function HomePage() {
                   key={cat.id}
                   variants={fadeInUp}
                   whileHover={{ y: -8 }}
-                  className="flex flex-col justify-between p-7 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-900/50 backdrop-blur-xl shadow-sm hover:shadow-2xl hover:border-teal-500/40 dark:hover:border-teal-500/40 transition-all duration-300 relative group overflow-hidden"
+                  className="flex flex-col justify-between p-5 sm:p-7 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-900/50 backdrop-blur-xl shadow-sm hover:shadow-2xl hover:border-teal-500/40 dark:hover:border-teal-500/40 transition-all duration-300 relative group overflow-hidden"
                 >
                   {/* Subtle Top Right Radial Light on Hover */}
                   <div className="absolute -top-12 -right-12 w-32 h-32 bg-teal-500/10 rounded-full blur-2xl group-hover:bg-teal-500/25 transition-all duration-500" />
@@ -350,7 +348,7 @@ function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="p-12 text-center rounded-3xl border border-dashed border-slate-300 dark:border-slate-800 bg-gradient-to-b from-slate-50/50 to-slate-100/30 dark:from-slate-900/30 dark:to-slate-900/10 space-y-4 relative overflow-hidden backdrop-blur-md"
+              className="p-8 sm:p-12 text-center rounded-3xl border border-dashed border-slate-300 dark:border-slate-800 bg-gradient-to-b from-slate-50/50 to-slate-100/30 dark:from-slate-900/30 dark:to-slate-900/10 space-y-4 relative overflow-hidden backdrop-blur-md"
             >
               {/* Background Ambient Aura for Empty State */}
               <div className="absolute inset-0 bg-gradient-to-r from-teal-500/5 via-transparent to-amber-500/5 pointer-events-none" />
