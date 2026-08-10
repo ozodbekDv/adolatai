@@ -15,6 +15,16 @@ export const translations = {
       savedOnDevice: "Qurilmada saqlanadi",
       sections: "Sahifada",
       aiChat: "AI Chat",
+      advocates: "Advokatlar",
+      locations: "Joylashuvlar",
+    },
+
+    footer: {
+      subtitle: "Huquqiy yordamchi",
+      disclaimer:
+        "Umumiy yo‘l-yo‘riq beradi, advokat xulosasi o‘rnini bosmaydi. Qonunlar o‘zgarishi mumkin — murojaatdan oldin rasmiy manbani tekshiring.",
+      privacyNotice: "Ma’lumot faqat qurilmada saqlanadi",
+      officialSources: "Rasmiy manbalar asosida",
     },
 
     hero: {
@@ -145,6 +155,7 @@ export const translations = {
       subtitle:
         "Matn kiritgan ma’lumotlaringiz asosida tuzildi. Yuborishdan oldin bo‘sh joylar va faktlarni tekshiring.",
       copyBtn: "Matnni ko‘chirish",
+      copy: "Nusxalash",
       copied: "Nusxalandi!",
       pdfBtn: "PDF yuklash",
       wordBtn: "Word .doc",
@@ -216,6 +227,156 @@ export const translations = {
       emptyDesc: "Jarayon oxirida «Murojaatni saqlash» tugmasini bosing.",
     },
 
+    advocatesPage: {
+      header: {
+        title: "Professional",
+        titleHighlight: "Advokatlar Ro'yxati",
+        subtitle:
+          "O'zingizga mos bo'lgan huquqshunosni tajribasi, narxi va mutaxassisligi bo'yicha tanlang hamda bevosita bog'laning.",
+      },
+      filters: {
+        title: "Filterlar",
+        searchLabel: "Qidiruv",
+        searchPlaceholder: "Ism yoki soha...",
+        specialtyLabel: "Mutaxassislik",
+        maxPriceLabel: "Maks. Narx (soatiga)",
+        currency: "so'm",
+        minExpLabel: "Min. Tajriba",
+        years: "yil",
+        resetBtn: "Filterlarni tozalash",
+      },
+      sort: {
+        found: "Topildi:",
+        countSuffix: "ta advokat",
+        label: "Saralash:",
+        options: {
+          rating: "Yuqori reyting bo'yicha",
+          exp: "Eng ko'p tajriba bo'yicha",
+          priceAsc: "Arzonroq narx bo'yicha",
+          priceDesc: "Qimmatroq narx bo'yicha",
+        },
+      },
+      card: {
+        reviews: "sharh",
+        experience: "Tajriba",
+        casesWon: "Yutilgan ish",
+        priceLabel: "Xizmat narxi:",
+        priceUnit: "so'm/soat",
+        profileBtn: "Profil",
+      },
+      notFound: {
+        title: "Advokat topilmadi",
+        subtitle:
+          "Kiritilgan filter parametrlaringizga mos keladigan advokatlar ro'yxati mavjud emas.",
+        resetBtn: "Filterlarni tozalash",
+      },
+      categories: {
+        all: "Barchasi",
+        civil: "Fuqarolik huquqi",
+        corporate: "Korporativ huquq",
+        criminal: "Jinoyat huquqi",
+        family: "Oila huquqi",
+      },
+    },
+
+    locationsPage: {
+      header: {
+        title: "Advokaturalar xaritasi",
+        subtitle:
+          "Farg'ona hududidagi advokatura tashkilotlarini toping va eng yaqin joyni tanlang.",
+      },
+      filters: {
+        locationSwitchLabel: "Eng yaqin joyni tanlang",
+        locationSwitchSubtitle: "Joylashuvingizni aniqlang",
+        searchPlaceholder: "Advokatura nomi yoki manzil",
+        cityLabel: "Tuman / Shahar",
+        clearBtn: "Filterni tozalash",
+      },
+      list: {
+        foundCount: "ta advokatura topildi",
+        sortLabel: "Saralash",
+        sortOptions: {
+          popular: "Mashhurlik bo'yicha",
+          nearest: "Eng yaqinlari",
+          rating: "Yuqori reytingli",
+        },
+        empty: "Ushbu filter bo'yicha hech qanday advokatura topilmadi.",
+        loadMore: "Yana ko'proq yuklash",
+      },
+      card: {
+        viewOnMap: "Xaritalarda ko'rish",
+        distanceFallback: "1.2 km sizdan",
+      },
+      map: {
+        myLocation: "Mening joylashuvim",
+        mapView: "Xarita",
+        satelliteView: "Sun'iy yo'ldosh",
+        getDirections: "Yo'l ko'rsatish",
+        call: "Qo'ng'iroq",
+        viewMap: "Xarita",
+        reviewsText: "4.3 (128 ta sharh)",
+        openNow: "Hozir ochiq",
+        hours: "09:00 - 18:00",
+        locationPrompt:
+          "Joylashuvingizni yoqing va eng yaqin advokatularni toping",
+        enableLocation: "Joylashuvni yoqish",
+      },
+      locations: {
+        all: "Barchasi",
+        fargona: "Farg'ona shahar",
+        qoqon: "Qo'qon shahar",
+        margilon: "Marg'ilon shahar",
+        rishton: "Rishton tumani",
+        oltiariq: "Oltiariq tumani",
+        quvasoy: "Quvasoy shahar",
+        bagdod: "Bag'dod tumani",
+        quva: "Quva tumani",
+        buvayda: "Buvayda tumani",
+        uchkoprik: "Uchko'prik tumani",
+        toshloq: "Toshloq tumani",
+        yozyovon: "Yozyovon tumani",
+      },
+    },
+
+    ai: {
+      badge: "AI Huquqiy Yordamchi v2.0",
+      titleStart: "Aql bilan",
+      titleHighlight: "huquqiy yechim",
+      titleEnd: "toping",
+      subtitle:
+        "Sun'iy intellekt bilan real vaqtda muloqot qiling, muammoingizni tahlil qiling va zudlik bilan professional yo'nalish oling.",
+      startBtn: "Suhbatni Boshlash",
+      orSelectCat: "Yoki yo'nalish bo'yicha tanlang",
+      categoryLabel: "Kategoriya:",
+      defaultCat: "Umumiy huquqiy yordam",
+      finishBtn: "Yakunlash",
+      activeBadge: "Faol",
+      placeholder: "Savolingizni yozing...",
+      completedTitle: "Suhbat Yakunlandi!",
+      completedDesc:
+        "Ma'lumotlaringiz muvaffaqiyatli saqlandi va qayta ishlashga tayyorlandi.",
+      direction: "Yo'nalish:",
+      msgCount: "Xabarlar soni:",
+      status: "Holat:",
+      statusUploaded: "Tizimga yuklandi",
+      newChatBtn: "Yangi Suhbat Boshlash",
+      startToast: "Suhbat boshlandi!",
+      finishError: "Suhbatni yakunlash uchun kamida bitta savol yuboring!",
+      saveSuccess: "Murojaatingiz saqlandi!",
+      ai: {
+        typing: "AI tahlil qilmoqda...",
+        welcome: (cat) =>
+          cat
+            ? `Assalomu alaykum! Men sizning intellektual huquqiy yordamchingizman. **${cat}** bo'yicha qanday muammo yoki savolingiz bor?`
+            : "Assalomu alaykum! Men sizning intellektual huquqiy yordamchingizman. Sizga qanday huquqiy masalada yordam bera olaman?",
+        response: (prompt, cat) =>
+          `Sizning "${prompt}" so'rovingiz tahlil qilindi. ${
+            cat
+              ? `${cat} bo'yicha amaldagi qonunchilikka ko'ra`
+              : "Amaldagi huquqiy me'yorlarga ko'ra"
+          }, siz o'z huquqlaringizni himoya qilish uchun tegishli tartibda ariza shakllantirishingiz mumkin.`,
+      },
+    },
     theme: "Mavzu",
     search: "Qidirish...",
     submit: "Yuborish",
@@ -226,7 +387,7 @@ export const translations = {
   // =========================================================
   // O'ZBEK TILI — KIRILL
   // =========================================================
-  uzCyrl: {
+  Уз: {
     header: {
       home: "Бош саҳифа",
       assistant: "Ёрдамчи",
@@ -239,6 +400,16 @@ export const translations = {
       savedOnDevice: "Қурилмада сақланади",
       sections: "Саҳифада",
       aiChat: "AI чат",
+      advocates: "Адвокатлар",
+      locations: "Жойлашувлар",
+    },
+
+    footer: {
+      subtitle: "Ҳуқуқий ёрдамчи",
+      disclaimer:
+        "Умумий йўл-йўриқ беради, адвокат хулосаси ўрнини босмайди. Қонунлар ўзгариши мумкин — мурожаатдан олдин расмий манбани текширинг.",
+      privacyNotice: "Маълумот фақат қурилмада сақланади",
+      officialSources: "Расмий манбалар асосида",
     },
 
     hero: {
@@ -384,6 +555,7 @@ export const translations = {
       subtitle:
         "Матн киритган маълумотларингиз асосида тузилди. Юборишдан олдин бўш жойлар ва фактларни текширинг.",
       copyBtn: "Матнни кўчириш",
+      copy: "Нусхалаш",
       copied: "Нусхаланди!",
       pdfBtn: "PDF юклаш",
       wordBtn: "Word .doc",
@@ -455,6 +627,156 @@ export const translations = {
       emptyDesc: "Жараён охирида «Мурожаатни сақлаш» тугмасини босинг.",
     },
 
+    advocatesPage: {
+      header: {
+        title: "Профессионал",
+        titleHighlight: "адвокатлар рўйхати",
+        subtitle:
+          "Ўзингизга мос бўлган ҳуқуқшуносни тажрибаси, нархи ва мутахассислиги бўйича танланг ҳамда бевосита боғланинг.",
+      },
+      filters: {
+        title: "Фильтрлар",
+        searchLabel: "Қидирув",
+        searchPlaceholder: "Исм ёки соҳа...",
+        specialtyLabel: "Мутахассислик",
+        maxPriceLabel: "Макс. Нарх (соатига)",
+        currency: "сўм",
+        minExpLabel: "Мин. Тажриба",
+        years: "йил",
+        resetBtn: "Фильтрларни тозалаш",
+      },
+      sort: {
+        found: "Топилди:",
+        countSuffix: "та адвокат",
+        label: "Саралаш:",
+        options: {
+          rating: "Юқори рейтинг бўйича",
+          exp: "Энг кўп тажриба бўйича",
+          priceAsc: "Арзонроқ нарх бўйича",
+          priceDesc: "Қимматроқ нарх бўйича",
+        },
+      },
+      card: {
+        reviews: "шарҳ",
+        experience: "Тажриба",
+        casesWon: "Ютилган иш",
+        priceLabel: "Хизмат нархи:",
+        priceUnit: "сўм/соат",
+        profileBtn: "Профиль",
+      },
+      notFound: {
+        title: "Адвокат топилмади",
+        subtitle:
+          "Киритилган фильтр параметрларингизга мос келадиган адвокатлар рўйхати мавжуд эмас.",
+        resetBtn: "Фильтрларни тозалаш",
+      },
+      categories: {
+        all: "Барчаси",
+        civil: "Фуқаролик ҳуқуқи",
+        corporate: "Корпоратив ҳуқуқ",
+        criminal: "Жиноят ҳуқуқи",
+        family: "Оила ҳуқуқи",
+      },
+    },
+
+    locationsPage: {
+      header: {
+        title: "Адвокатуралар харитаси",
+        subtitle:
+          "Фарғона вилоятидаги адвокатура ташкилотларини топинг ва энг яқин жойни танланг.",
+      },
+      filters: {
+        locationSwitchLabel: "Энг яқин жойни танланг",
+        locationSwitchSubtitle: "Жойлашувингизни аниқланг",
+        searchPlaceholder: "Адвокатура номи ёки манзил",
+        cityLabel: "Туман / Шаҳар",
+        clearBtn: "Фильтрни тозалаш",
+      },
+      list: {
+        foundCount: "та адвокатура топилди",
+        sortLabel: "Саралаш",
+        sortOptions: {
+          popular: "Машҳурлик бўйича",
+          nearest: "Энг яқинлари",
+          rating: "Юқори рейтингли",
+        },
+        empty: "Ушбу фильтр бўйича ҳеч қандай адвокатура топилмади.",
+        loadMore: "Яна кўпроқ юклаш",
+      },
+      card: {
+        viewOnMap: "Хариталарда кўриш",
+        distanceFallback: "1.2 км сиздан",
+      },
+      map: {
+        myLocation: "Менинг жойлашувим",
+        mapView: "Харита",
+        satelliteView: "Сунъий йўлдош",
+        getDirections: "Йўл кўрсатиш",
+        call: "Қўнғироқ",
+        viewMap: "Харита",
+        reviewsText: "4.3 (128 та шарҳ)",
+        openNow: "Ҳозир очиқ",
+        hours: "09:00 - 18:00",
+        locationPrompt: "Жойлашувингизни ёқинг ва энг яқин адвокатларни топинг",
+        enableLocation: "Жойлашувни ёқиш",
+      },
+      locations: {
+        all: "Барчаси",
+        fargona: "Фарғона шаҳри",
+        qoqon: "Қўқон шаҳри",
+        margilon: "Марғилон шаҳри",
+        rishton: "Риштон тумани",
+        oltiariq: "Олтиариқ тумани",
+        quvasoy: "Қувосой шаҳри",
+        bagdod: "Багдод тумани",
+        quva: "Қува тумани",
+        buvayda: "Бувайда тумани",
+        uchkoprik: "Учко'прик тумани",
+        toshloq: "Тошлоқ тумани",
+        yozyovon: "Ёзёвон тумани",
+      },
+    },
+
+    ai: {
+      badge: "AI Ҳуқуқий Ёрдамчи v2.0",
+      titleStart: "Ақл билан",
+      titleHighlight: "ҳуқуқий ечим",
+      titleEnd: "топинг",
+      subtitle:
+        "Сунъий интеллект билан реал вақтда мулоқот қилинг, муаммоингизни таҳлил қилинг ва зудлик билан профессионал йўналиш олинг.",
+      startBtn: "Суҳбатни Бошлаш",
+      orSelectCat: "Ёки йўналиш бўйича танланг",
+      categoryLabel: "Категория:",
+      defaultCat: "Умумий ҳуқуқий ёрдам",
+      finishBtn: "Якунлаш",
+      activeBadge: "Фаол",
+      placeholder: "Саволингизни ёзинг...",
+      completedTitle: "Суҳбат Якунланди!",
+      completedDesc:
+        "Маълумотларингиз муваффақиятли сақланди ва қайта ишлашга тайёрланди.",
+      direction: "Йўналиш:",
+      msgCount: "Хабарлар сони:",
+      status: "Ҳолат:",
+      statusUploaded: "Тизимга юкланди",
+      newChatBtn: "Янги Суҳбат Бошлаш",
+      startToast: "Суҳбат бошланди!",
+      finishError: "Суҳбатни якунлаш учун камида битта савол юборинг!",
+      saveSuccess: "Мурожаатингиз сақланди!",
+      ai: {
+        typing: "AI таҳлил қилмоқда...",
+        welcome: (cat) =>
+          cat
+            ? `Ассалому алайкум! Мен сизнинг интеллектуал ҳуқуқий ёрдамчингизман. **${cat}** бўйича қандай муаммо ёки саволингиз бор?`
+            : "Ассалому алайкум! Мен сизнинг интеллектуал ҳуқуқий ёрдамчингизман. Сизга қандай ҳуқуқий масалада ёрдам бера оламан?",
+        response: (prompt, cat) =>
+          `Сизнинг "${prompt}" сўровингиз таҳлил қилинди. ${
+            cat
+              ? `${cat} бўйича амалдаги қонунчиликка кўра`
+              : "Амалдаги ҳуқуқий меъёрларга кўра"
+          }, сиз ўз ҳуқуқларингизни ҳимоя қилиш учун тегишли тартибда ариза шакллантиришингиз мумкин.`,
+      },
+    },
+
     theme: "Мавзу",
     search: "Қидириш...",
     submit: "Юбориш",
@@ -465,7 +787,7 @@ export const translations = {
   // =========================================================
   // RUS TILI
   // =========================================================
-  ru: {
+  РУ: {
     header: {
       home: "Главная",
       assistant: "Помощник",
@@ -478,6 +800,16 @@ export const translations = {
       savedOnDevice: "Сохраняется на устройстве",
       sections: "На странице",
       aiChat: "AI чат",
+      advocates: "Адвокаты",
+      locations: "Местоположения",
+    },
+
+    footer: {
+      subtitle: "Правовой помощник",
+      disclaimer:
+        "Даёт общую рекомендацию и не заменяет юридическое заключение адвоката. Законы могут изменяться — перед обращением проверьте официальный источник.",
+      privacyNotice: "Данные сохраняются только на устройстве",
+      officialSources: "На основе официальных источников",
     },
 
     hero: {
@@ -610,6 +942,7 @@ export const translations = {
       subtitle:
         "Текст сформирован на основе введённых вами данных. Перед отправкой проверьте пустые поля и факты.",
       copyBtn: "Скопировать текст",
+      copy: "Копировать",
       copied: "Скопировано!",
       pdfBtn: "Скачать PDF",
       wordBtn: "Word .doc",
@@ -682,6 +1015,157 @@ export const translations = {
       emptyDesc: "Нажмите «Сохранить обращение» в конце процесса.",
     },
 
+    advocatesPage: {
+      header: {
+        title: "Профессиональные",
+        titleHighlight: "Адвокаты",
+        subtitle:
+          "Выберите подходящего юриста по опыту, стоимости услуг и специализации и свяжитесь с ним напрямую.",
+      },
+      filters: {
+        title: "Фильтры",
+        searchLabel: "Поиск",
+        searchPlaceholder: "Имя или специализация...",
+        specialtyLabel: "Специализация",
+        maxPriceLabel: "Макс. цена (в час)",
+        currency: "сум",
+        minExpLabel: "Мин. опыт",
+        years: "лет",
+        resetBtn: "Сбросить фильтры",
+      },
+      sort: {
+        found: "Найдено:",
+        countSuffix: "адвокатов",
+        label: "Сортировка:",
+        options: {
+          rating: "По рейтингу",
+          exp: "По наибольшему опыту",
+          priceAsc: "Сначала дешевле",
+          priceDesc: "Сначала дороже",
+        },
+      },
+      card: {
+        reviews: "отзывов",
+        experience: "Опыт",
+        casesWon: "Выиграно дел",
+        priceLabel: "Стоимость услуг:",
+        priceUnit: "сум/час",
+        profileBtn: "Профиль",
+      },
+      notFound: {
+        title: "Адвокаты не найдены",
+        subtitle:
+          "Список адвокатов, соответствующих введенным параметрам фильтра, отсутствует.",
+        resetBtn: "Сбросить фильтры",
+      },
+      categories: {
+        all: "Все",
+        civil: "Гражданское право",
+        corporate: "Корпоративное право",
+        criminal: "Уголовное право",
+        family: "Семейное право",
+      },
+    },
+
+    locationsPage: {
+      header: {
+        title: "Карта адвокатур",
+        subtitle:
+          "Найдите адвокатские организации в Ферганской области и выберите ближайшее место.",
+      },
+      filters: {
+        locationSwitchLabel: "Выберите ближайшее место",
+        locationSwitchSubtitle: "Определите ваше местоположение",
+        searchPlaceholder: "Название адвокатуры или адрес",
+        cityLabel: "Район / Город",
+        clearBtn: "Сбросить фильтр",
+      },
+      list: {
+        foundCount: "адвокатур найдено",
+        sortLabel: "Сортировка",
+        sortOptions: {
+          popular: "По популярности",
+          nearest: "Ближайшие",
+          rating: "С высоким рейтингом",
+        },
+        empty: "По этому фильтру не найдено ни одной адвокатуры.",
+        loadMore: "Загрузить ещё",
+      },
+      card: {
+        viewOnMap: "Посмотреть на карте",
+        distanceFallback: "1.2 км от вас",
+      },
+      map: {
+        myLocation: "Моё местоположение",
+        mapView: "Карта",
+        satelliteView: "Спутник",
+        getDirections: "Построить маршрут",
+        call: "Позвонить",
+        viewMap: "Карта",
+        reviewsText: "4.3 (128 отзывов)",
+        openNow: "Сейчас открыто",
+        hours: "09:00 - 18:00",
+        locationPrompt:
+          "Включите ваше местоположение и найдите ближайших адвокатов",
+        enableLocation: "Включить местоположение",
+      },
+      locations: {
+        all: "Все",
+        fargona: "г. Фергана",
+        qoqon: "г. Коканд",
+        margilon: "г. Маргилан",
+        rishton: "Риштанский район",
+        oltiariq: "Алтыарыкский район",
+        quvasoy: "г. Кувасай",
+        bagdod: "Багдадский район",
+        quva: "Кувинский район",
+        buvayda: "Бувайдинский район",
+        uchkoprik: "Учкуприкский район",
+        toshloq: "Ташлакский район",
+        yozyovon: "Язъяванский район",
+      },
+    },
+
+    ai: {
+      badge: "AI Юридический Помощник v2.0",
+      titleStart: "Найдите",
+      titleHighlight: "правовое решение",
+      titleEnd: "с умом",
+      subtitle:
+        "Общайтесь с искусственным интеллектом в реальном времени, анализируйте вашу проблему и получайте профессиональные рекомендации.",
+      startBtn: "Начать чат",
+      orSelectCat: "Или выберите по направлению",
+      categoryLabel: "Категория:",
+      defaultCat: "Общая юридическая помощь",
+      finishBtn: "Завершить",
+      activeBadge: "Активен",
+      placeholder: "Введите ваш вопрос...",
+      completedTitle: "Консультация завершена!",
+      completedDesc:
+        "Ваши данные успешно сохранены и подготовлены для дальнейшей обработки.",
+      direction: "Направление:",
+      msgCount: "Сообщений:",
+      status: "Статус:",
+      statusUploaded: "Загружено в систему",
+      newChatBtn: "Начать новый чат",
+      startToast: "Чат начат!",
+      finishError: "Отправьте хотя бы один вопрос, чтобы завершить чат!",
+      saveSuccess: "Ваше обращение сохранено!",
+      ai: {
+        typing: "AI анализирует...",
+        welcome: (cat) =>
+          cat
+            ? `Здравствуйте! Я ваш интеллектуальный юридический помощник. Какой у вас вопрос по теме **${cat}**?`
+            : "Здравствуйте! Я ваш интеллектуальный юридический помощник. Чем я могу помочь вам в правовых вопросах?",
+        response: (prompt, cat) =>
+          `Ваш запрос "${prompt}" был проанализирован. ${
+            cat
+              ? `Согласно действующему законодательству по теме ${cat}`
+              : "Согласно действующим правовым нормам"
+          }, вы можете подать заявление в установленном порядке для защиты своих прав.`,
+      },
+    },
+
     theme: "Тема",
     search: "Поиск...",
     submit: "Отправить",
@@ -692,7 +1176,7 @@ export const translations = {
   // =========================================================
   // ENGLISH
   // =========================================================
-  en: {
+  ENG: {
     header: {
       home: "Home",
       assistant: "Assistant",
@@ -705,6 +1189,16 @@ export const translations = {
       savedOnDevice: "Saved on this device",
       sections: "On this page",
       aiChat: "AI chat",
+      advocates: "Advocates",
+      locations: "Locations",
+    },
+
+    footer: {
+      subtitle: "Legal assistant",
+      disclaimer:
+        "Provides general guidance and does not replace a lawyer’s opinion. Laws may change — verify the official source before filing an appeal.",
+      privacyNotice: "Data is stored only on this device",
+      officialSources: "Based on official sources",
     },
 
     hero: {
@@ -836,6 +1330,7 @@ export const translations = {
       subtitle:
         "The text was generated based on the information you provided. Check the blank fields and facts before submitting.",
       copyBtn: "Copy text",
+      copy: "Copy",
       copied: "Copied!",
       pdfBtn: "Download PDF",
       wordBtn: "Word .doc",
@@ -907,6 +1402,156 @@ export const translations = {
       clearAll: "Clear all",
       emptyTitle: "No saved appeals yet.",
       emptyDesc: "Click “Save appeal” at the end of the process.",
+    },
+
+    advocatesPage: {
+      header: {
+        title: "Professional",
+        titleHighlight: "List of Advocates",
+        subtitle:
+          "Choose the right lawyer based on experience, rate, and specialty, and contact them directly.",
+      },
+      filters: {
+        title: "Filters",
+        searchLabel: "Search",
+        searchPlaceholder: "Name or specialty...",
+        specialtyLabel: "Specialization",
+        maxPriceLabel: "Max Price (hourly)",
+        currency: "UZS",
+        minExpLabel: "Min. Experience",
+        years: "years",
+        resetBtn: "Reset Filters",
+      },
+      sort: {
+        found: "Found:",
+        countSuffix: "advocates",
+        label: "Sort by:",
+        options: {
+          rating: "Highest rating",
+          exp: "Most experienced",
+          priceAsc: "Price: Low to High",
+          priceDesc: "Price: High to Low",
+        },
+      },
+      card: {
+        reviews: "reviews",
+        experience: "Experience",
+        casesWon: "Cases won",
+        priceLabel: "Service fee:",
+        priceUnit: "UZS/hr",
+        profileBtn: "Profile",
+      },
+      notFound: {
+        title: "No advocates found",
+        subtitle:
+          "There are no advocates matching your current filter criteria.",
+        resetBtn: "Reset Filters",
+      },
+      categories: {
+        all: "All",
+        civil: "Civil Law",
+        corporate: "Corporate Law",
+        criminal: "Criminal Law",
+        family: "Family Law",
+      },
+    },
+
+    locationsPage: {
+      header: {
+        title: "Advocacy map",
+        subtitle:
+          "Find advocacy organizations across the Fergana region and choose the closest location.",
+      },
+      filters: {
+        locationSwitchLabel: "Choose the nearest place",
+        locationSwitchSubtitle: "Detect your location",
+        searchPlaceholder: "Advocacy name or address",
+        cityLabel: "District / City",
+        clearBtn: "Clear filters",
+      },
+      list: {
+        foundCount: "advocacy centers found",
+        sortLabel: "Sort",
+        sortOptions: {
+          popular: "Most popular",
+          nearest: "Closest",
+          rating: "Highest rated",
+        },
+        empty: "No advocacy centers were found for this filter.",
+        loadMore: "Load more",
+      },
+      card: {
+        viewOnMap: "View on map",
+        distanceFallback: "1.2 km from you",
+      },
+      map: {
+        myLocation: "My location",
+        mapView: "Map",
+        satelliteView: "Satellite",
+        getDirections: "Get directions",
+        call: "Call",
+        viewMap: "Map",
+        reviewsText: "4.3 (128 reviews)",
+        openNow: "Open now",
+        hours: "09:00 - 18:00",
+        locationPrompt: "Turn on your location and find the nearest advocates",
+        enableLocation: "Enable location",
+      },
+      locations: {
+        all: "All",
+        fargona: "Fergana city",
+        qoqon: "Qoqon city",
+        margilon: "Margilan city",
+        rishton: "Rishton district",
+        oltiariq: "Oltiariq district",
+        quvasoy: "Quvasoy city",
+        bagdod: "Bagdod district",
+        quva: "Quva district",
+        buvayda: "Buvayda district",
+        uchkoprik: "Uchkoprik district",
+        toshloq: "Toshloq district",
+        yozyovon: "Yozyovon district",
+      },
+    },
+
+    ai: {
+      badge: "AI Legal Assistant v2.0",
+      titleStart: "Find a smart",
+      titleHighlight: "legal solution",
+      titleEnd: "instantly",
+      subtitle:
+        "Chat with artificial intelligence in real time, analyze your problem, and get immediate professional guidance.",
+      startBtn: "Start Consultation",
+      orSelectCat: "Or select by category",
+      categoryLabel: "Category:",
+      defaultCat: "General Legal Advice",
+      finishBtn: "Finish",
+      activeBadge: "Active",
+      placeholder: "Type your question...",
+      completedTitle: "Consultation Finished!",
+      completedDesc:
+        "Your information has been successfully saved and processed.",
+      direction: "Category:",
+      msgCount: "Total messages:",
+      status: "Status:",
+      statusUploaded: "Saved to System",
+      newChatBtn: "Start New Chat",
+      startToast: "Chat started!",
+      finishError: "Please send at least one message before finishing!",
+      saveSuccess: "Your request has been saved!",
+      ai: {
+        typing: "AI is analyzing...",
+        welcome: (cat) =>
+          cat
+            ? `Hello! I am your AI legal assistant. What issue or question do you have regarding **${cat}**?`
+            : "Hello! I am your AI legal assistant. How can I assist you with your legal matters today?",
+        response: (prompt, cat) =>
+          `Your request "${prompt}" has been analyzed. ${
+            cat
+              ? `According to current legislation on ${cat}`
+              : "According to applicable legal standards"
+          }, you may submit a formal application to protect your rights.`,
+      },
     },
 
     theme: "Theme",
