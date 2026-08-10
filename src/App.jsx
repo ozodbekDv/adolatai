@@ -19,6 +19,7 @@ import { AssistantPage } from "./pages/AssistantPage";
 import Advocates from "./pages/Advocates";
 import AdvocateProfile from "./pages/AdvocateProfile";
 import { ProfilePage } from "./pages/ProfilePage";
+import AdvocacyMapUI from "./pages/Locations";
 
 const queryClient = new QueryClient();
 
@@ -78,6 +79,10 @@ export function App() {
         {
           path: "/profile",
           element: <ProfilePage />,
+        },
+        {
+          path: "/locations",
+          element: <AdvocacyMapUI />,
         },
       ],
     },

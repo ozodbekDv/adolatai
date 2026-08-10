@@ -9,7 +9,6 @@ import {
   Users,
   RotateCcw,
   CheckCircle2,
-  Circle,
   ChevronDown,
   X,
   FileText,
@@ -505,13 +504,6 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                   })}
                 </div>
               </div>
-
-              <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800/80 hidden lg:block">
-                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                  Barcha kiritilgan ma'lumotlar maxfiy saqlanadi va uchinchi
-                  shaxslarga berilmaydi.
-                </p>
-              </div>
             </div>
 
             {/* Content Column */}
@@ -873,7 +865,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                   className="border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl px-5 disabled:opacity-30"
                 >
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  Orqaga
+                  {t("stepWizard.navigation.back") || "Orqaga"}
                 </Button>
 
                 <div className="flex items-center gap-3 ml-auto">
@@ -883,7 +875,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                     className="border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/80 text-slate-800 dark:text-slate-200 text-xs sm:text-sm py-5 rounded-xl"
                   >
                     <FileText className="w-4 h-4 mr-2" />
-                    Matnni Ko'rish
+                    {t("stepWizard.navigation.readyText") || "Matnni Ko'rish"}
                   </Button>
 
                   {currentStep < 4 ? (
@@ -928,10 +920,10 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                 <div>
                   <div className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-widest text-emerald-600 dark:text-emerald-400 uppercase mb-1">
                     <Sparkles className="w-3.5 h-3.5" />
-                    <span>Tayyor Hujjat</span>
+                    <span>{t("appealModal.badge") || "TAYYOR NATIJA"}</span>
                   </div>
                   <h3 className="text-2xl font-black text-slate-900 dark:text-white">
-                    Rasmiy Murojaat Matni
+                    {t("appealModal.title") || "TAYYOR NATIJA"}
                   </h3>
                 </div>
                 <button
@@ -954,7 +946,11 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                   className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm px-5 py-5 rounded-xl shadow transition-all flex items-center gap-2"
                 >
                   <Copy className="w-4 h-4" />
-                  <span>{copied ? "Nusxalandi!" : "Nusxa olish"}</span>
+                  <span>
+                    {copied
+                      ? t("appealModal.copied") || "Nusxalandi!"
+                      : t("appealModal.copy") || "Nusxa olish"}
+                  </span>
                 </Button>
                 <Button
                   onClick={handleDownloadWord}
@@ -962,7 +958,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                   className="border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 text-xs sm:text-sm px-4 py-5 rounded-xl transition-all flex items-center gap-2"
                 >
                   <Download className="w-4 h-4" />
-                  <span>Word (.doc)</span>
+                  <span>{t("appealModal.wordBtn") || "Word (.doc)"}</span>
                 </Button>
                 <Button
                   onClick={handleDownloadPDF}
@@ -970,7 +966,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                   className="border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 text-xs sm:text-sm px-4 py-5 rounded-xl transition-all flex items-center gap-2"
                 >
                   <Printer className="w-4 h-4" />
-                  <span>PDF Yuklash</span>
+                  <span>{t("appealModal.pdfBtn") || "PDF Yuklash"}</span>
                 </Button>
               </div>
             </motion.div>

@@ -126,8 +126,13 @@ export const Header = () => {
             to="/advocates"
             className="hidden sm:inline-block text-base hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           >
-            Advokatlar
-            {/* {t("header.advocates") || "Advokatlar"} */}
+            {t("header.advocates") || "Advokatlar"}
+          </Link>
+          <Link
+            to="/locations"
+            className="hidden sm:inline-block text-base hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+          >
+            {t("header.locations") || "Locations"}
           </Link>
         </div>
 
@@ -153,17 +158,14 @@ export const Header = () => {
               <SelectItem value="uz" className="font-semibold cursor-pointer">
                 UZ
               </SelectItem>
-              <SelectItem
-                value="uzCyrl"
-                className="font-semibold cursor-pointer"
-              >
-                UZCrl
+              <SelectItem value="Уз" className="font-semibold cursor-pointer">
+                Уз
               </SelectItem>
-              <SelectItem value="ru" className="font-semibold cursor-pointer">
-                RU
+              <SelectItem value="РУ" className="font-semibold cursor-pointer">
+                РУ
               </SelectItem>
-              <SelectItem value="en" className="font-semibold cursor-pointer">
-                EN
+              <SelectItem value="ENG" className="font-semibold cursor-pointer">
+                ENG
               </SelectItem>
             </SelectContent>
           </Select>
