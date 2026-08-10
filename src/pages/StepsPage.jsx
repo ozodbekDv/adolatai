@@ -25,92 +25,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useI18n } from "../hooks/useI18n";
 
-// Dynamic Legal Data per Category
-const LEGAL_DATA_BY_CATEGORY = {
-  work: {
-    laws: [
-      {
-        title: "Mehnat Kodeksi 161-modda — Mehnat shartnomasini bekor qilish",
-        desc: "Mehnat shartnomasi qonunda nazarda tutilgan asoslar bo'yicha bekor qilinadi.",
-      },
-      {
-        title: "Mehnat Kodeksi 244-modda — Ish haqini to'lash muddatlari",
-        desc: "Ish beruvchi xodimga ish haqini o'z vaqtida va to'liq to'lashi shart.",
-      },
-    ],
-    actions: [
-      "Ish beruvchiga rasmiy yozma e'tiroz yoki talabnoma yuboring.",
-      "Mehnat inspektsiyasiga (Bandlik vazirligi) murojaat yo'llang.",
-      "Natija bo'lmagan taqdirda Fuqarolik ishlar bo'yicha sudga da'vo arizasi kiriting.",
-    ],
-  },
-  consumer: {
-    laws: [
-      {
-        title: "Iste'molchilar huquqlarini himoya qilish to'g'risida 18-modda",
-        desc: "Nuqsonli tovar sotilganda iste'molchi uni almashtirish yoki pulini qaytarishni talab qilishga haqli.",
-      },
-    ],
-    actions: [
-      "Sotuvchi/xizmat ko'rsatuvchiga chek va dalillar bilan yozma talabnoma bering.",
-      "Iste'molchilar huquqlarini himoya qilish agentligiga murojaat qiling.",
-    ],
-  },
-  housing: {
-    laws: [
-      {
-        title: "Uy-joy Kodeksi 11-modda — Uy-joy huquqlarini himoya qilish",
-        desc: "Uy-joyga oid buzilgan huquqlar qonunchilikda nazarda tutilgan tartibda himoya qilinadi.",
-      },
-      {
-        title: "Uy-joy Kodeksi 86-modda — Turar joyni arendaga berish",
-        desc: "Turar joydan haq evaziga foydalanish shartnoma bilan rasmiylashtiriladi.",
-      },
-    ],
-    actions: [
-      "Ijaraga beruvchi yoki qarshi tomonga yozma bildirishnoma yuboring.",
-      "Uy-joy shartnomasi va to'lov kvitansiyalarini tayyorlab qo'ying.",
-      "Hududiy fuqarolik sudiga ariza bilan murojaat qiling.",
-    ],
-  },
-  utilities: {
-    laws: [
-      {
-        title: "Kommunal xizmat ko'rsatish qoidalari — Xizmat sifati",
-        desc: "Tashkilot iste'molchini uzluksiz va sifatli kommunal xizmat bilan ta'minlashi shart.",
-      },
-    ],
-    actions: [
-      "Tegishli kommunal korxonaga (gaz, elektr, suv) rasmiy e'tiroz yuboring.",
-      "MIB yoki Bosh prokuratura qoshidagi inspektsiyaga xabar bering.",
-    ],
-  },
-  fines: {
-    laws: [
-      {
-        title: "MJtK 315-modda — Ma'muriy nohaq qaror ustidan shikoyat",
-        desc: "Jarima qarori ustidan 10 kun muddatda yuqori organga yoki sudga shikoyat qilinishi mumkin.",
-      },
-    ],
-    actions: [
-      "Qaror yoki bayonnoma nusxasini oling.",
-      "10 kunlik muddatni o'tkazib yubormasdan ma'muriy sudga shikoyat kiriting.",
-    ],
-  },
-  family: {
-    laws: [
-      {
-        title: "Oila Kodeksi 96-modda — Aliment undirish",
-        desc: "Ota-ona voyaga yetmagan bolalariga ta'minot berishi shart.",
-      },
-    ],
-    actions: [
-      "Aliment undirish bo'yicha fuqarolik sudiga ariza yuboring.",
-      "Bolalarning tug'ilganlik haqidagi guvohnomalari nusxasini tayyorlang.",
-    ],
-  },
-};
-
+// Legal content is loaded from translations below so the wizard stays localized.
 export default function StepWizard() {
   const { t } = useI18n();
 
@@ -228,12 +143,99 @@ export default function StepWizard() {
     { id: 4, title: t("stepWizard.steps.result") || "Natija" },
   ];
 
+  const legalDataByCategory = useMemo(
+    () => ({
+      work: {
+        laws: [
+          {
+            title: t("stepWizard.legalData.work.laws.0.title") || "",
+            desc: t("stepWizard.legalData.work.laws.0.desc") || "",
+          },
+          {
+            title: t("stepWizard.legalData.work.laws.1.title") || "",
+            desc: t("stepWizard.legalData.work.laws.1.desc") || "",
+          },
+        ],
+        actions: [
+          t("stepWizard.legalData.work.actions.0") || "",
+          t("stepWizard.legalData.work.actions.1") || "",
+          t("stepWizard.legalData.work.actions.2") || "",
+        ],
+      },
+      consumer: {
+        laws: [
+          {
+            title: t("stepWizard.legalData.consumer.laws.0.title") || "",
+            desc: t("stepWizard.legalData.consumer.laws.0.desc") || "",
+          },
+        ],
+        actions: [
+          t("stepWizard.legalData.consumer.actions.0") || "",
+          t("stepWizard.legalData.consumer.actions.1") || "",
+        ],
+      },
+      housing: {
+        laws: [
+          {
+            title: t("stepWizard.legalData.housing.laws.0.title") || "",
+            desc: t("stepWizard.legalData.housing.laws.0.desc") || "",
+          },
+          {
+            title: t("stepWizard.legalData.housing.laws.1.title") || "",
+            desc: t("stepWizard.legalData.housing.laws.1.desc") || "",
+          },
+        ],
+        actions: [
+          t("stepWizard.legalData.housing.actions.0") || "",
+          t("stepWizard.legalData.housing.actions.1") || "",
+          t("stepWizard.legalData.housing.actions.2") || "",
+        ],
+      },
+      utilities: {
+        laws: [
+          {
+            title: t("stepWizard.legalData.utilities.laws.0.title") || "",
+            desc: t("stepWizard.legalData.utilities.laws.0.desc") || "",
+          },
+        ],
+        actions: [
+          t("stepWizard.legalData.utilities.actions.0") || "",
+          t("stepWizard.legalData.utilities.actions.1") || "",
+        ],
+      },
+      fines: {
+        laws: [
+          {
+            title: t("stepWizard.legalData.fines.laws.0.title") || "",
+            desc: t("stepWizard.legalData.fines.laws.0.desc") || "",
+          },
+        ],
+        actions: [
+          t("stepWizard.legalData.fines.actions.0") || "",
+          t("stepWizard.legalData.fines.actions.1") || "",
+        ],
+      },
+      family: {
+        laws: [
+          {
+            title: t("stepWizard.legalData.family.laws.0.title") || "",
+            desc: t("stepWizard.legalData.family.laws.0.desc") || "",
+          },
+        ],
+        actions: [
+          t("stepWizard.legalData.family.actions.0") || "",
+          t("stepWizard.legalData.family.actions.1") || "",
+        ],
+      },
+    }),
+    [t],
+  );
+
   const currentLegalInfo = useMemo(() => {
     return (
-      LEGAL_DATA_BY_CATEGORY[formData.category] ||
-      LEGAL_DATA_BY_CATEGORY.housing
+      legalDataByCategory[formData.category] || legalDataByCategory.housing
     );
-  }, [formData.category]);
+  }, [formData.category, legalDataByCategory]);
 
   const generateAppealText = () => {
     const selectedEvidencesText = formData.evidences
@@ -248,35 +250,59 @@ export default function StepWizard() {
       ? selectedEvidencesText
           .map((item, idx) => `${idx + 1}. ${item}`)
           .join("\n")
-      : "1. Mavjud emas";
+      : `1. ${t("appealModal.noEvidences") || "Mavjud emas"}`;
 
     const legalNormsFormatted = currentLegalInfo.laws
       .map((law) => `${law.title}\n   (${law.desc})`)
       .join("\n\n");
 
-    return `TUMAN/SHAHAR HOKIMLIGI YOKI FUQAROLIK ISHLARI BO‘YICHA SUDGA
+    const header = t("appealTemplate.header") || "TUMAN/SHAHAR HOKIMLIGI";
+    const from = t("appealTemplate.from") || "Kimdan";
+    const address = t("appealTemplate.address") || "Manzil va aloqa";
+    const title = t("appealTemplate.title") || "ARIZA";
+    const bodyIntro = t("appealTemplate.bodyIntro") || "Men";
+    const bodyText = t("appealTemplate.bodyText") || "sanasida";
+    const bodyText2 =
+      t("appealTemplate.bodyText2") ||
+      "bilan bog'liq quyidagi holat yuzasidan murojaat qilaman";
+    const legalBasis = t("appealTemplate.legalBasis") || "HUQUQIY ASOSLAR";
+    const requestHeader =
+      t("appealTemplate.requestHeader") || "SHU ASOSDA SO'RAYMAN";
+    const request1 =
+      t("appealTemplate.request1") ||
+      "Bayon qilingan holatni tekshirishingizni";
+    const request2 =
+      t("appealTemplate.request2") || "Buzilgan huquqni tiklashni";
+    const request3 =
+      t("appealTemplate.request3") ||
+      "Qabul qilingan qaror haqida javob yuborishingizni";
+    const attachments = t("appealTemplate.attachments") || "ILOVALAR";
+    const date = t("appealTemplate.date") || "Sana";
+    const signature = t("appealTemplate.signature") || "Imzo";
 
-Kimdan: ${formData.fullName || "[Ism Familiyangiz]"}
-Manzil va aloqa: [Telefon / Manzilingiz]
+    return `${header}
 
-ARIZA
+${from}: ${formData.fullName || "[Ism Familiyangiz]"}
+${address}: [Telefon / Manzilingiz]
 
-Men, ${formData.fullName || "[Ism Familiyangiz]"}, ${formData.date || "[sana]"} sanasida ${formData.opponent || "[tashkilot/shaxs]"} bilan bog‘liq quyidagi holat yuzasidan murojaat qilaman:
+${title}
+
+${bodyIntro}, ${formData.fullName || "[Ism Familiyangiz]"}, ${formData.date || "[sana]"} ${bodyText} ${formData.opponent || "[tashkilot/shaxs]"} ${bodyText2}:
 
 ${formData.description || "[Vaziyat batafsil bayoni]"}
 
-HUQUQIY ASOSLAR:
+${legalBasis}:
 ${legalNormsFormatted}
 
-SHU ASOSDA SO‘RAYMAN:
-1. Bayon qilingan holatni vakolatingiz doirasida tekshirishingizni;
-2. Buzilgan huquqni tiklash va qonuniy choralar ko‘rishingizni;
-3. Qabul qilingan qaror va uning asoslari haqida menga yozma javob yuborishingizni.
+${requestHeader}:
+1. ${request1};
+2. ${request2};
+3. ${request3}.
 
-ILOVALAR:
+${attachments}:
 ${ilovalarFormatted}
 
-Sana: ${currentDateFormatted}             Imzo: __________`;
+${date}: ${currentDateFormatted}             ${signature}: __________`;
   };
 
   const handleCopyText = () => {
@@ -360,7 +386,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
     <>
       <section
         id="stages"
-        className="w-full py-12 px-4 md:px-12 lg:px-20 border-t border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 relative overflow-hidden transition-colors duration-300"
+        className="w-full py-8 sm:py-12 px-3 sm:px-4 md:px-12 lg:px-20 border-t border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 relative overflow-hidden transition-colors duration-300"
       >
         {/* Glow orqa foni */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-cyan-500/20 via-emerald-500/10 to-indigo-500/20 blur-[130px] pointer-events-none rounded-full" />
@@ -375,7 +401,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                   {t("stepWizard.headerLabel") || "AI Huquqiy Constructor"}
                 </span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
                 {t("stepWizard.headerTitle") || "Huquqiy Murojaat Yaratish"}
               </h2>
             </div>
@@ -392,10 +418,12 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
           {/* Main Card */}
           <div className="grid grid-cols-1 lg:grid-cols-12 rounded-3xl overflow-hidden border border-slate-200/80 dark:border-slate-800/80 shadow-xl dark:shadow-2xl bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl">
             {/* Sidebar: Progress & Navigation */}
-            <div className="lg:col-span-3 bg-slate-100/70 dark:bg-slate-950/80 p-6 md:p-8 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800/80 flex flex-col justify-between">
+            <div className="lg:col-span-3 bg-slate-100/70 dark:bg-slate-950/80 p-4 sm:p-6 md:p-8 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800/80 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between text-xs font-bold text-slate-500 dark:text-slate-400 mb-2">
-                  <span>Qadam: {currentStep} / 4</span>
+                  <span>
+                    {t("stepWizard.progress.step")}: {currentStep} / 4
+                  </span>
                   <span className="text-cyan-600 dark:text-cyan-400 font-extrabold">
                     {Math.round((currentStep / 4) * 100)}%
                   </span>
@@ -458,7 +486,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                           )}
 
                           <div
-                            className={`w-10 h-10 rounded-xl flex items-center justify-center text-xs font-bold transition-all duration-300 shadow-sm ${
+                            className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center text-xs font-bold transition-all duration-300 shadow-sm ${
                               isDone
                                 ? "bg-emerald-500 text-white shadow-emerald-500/20"
                                 : isActive
@@ -495,7 +523,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                               animate={{ opacity: 1, x: 0 }}
                               className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 tracking-wider uppercase"
                             >
-                              Jarayonda...
+                              {t("stepWizard.progress.inProgress")}
                             </motion.span>
                           )}
                         </div>
@@ -507,7 +535,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
             </div>
 
             {/* Content Column */}
-            <div className="lg:col-span-9 p-6 md:p-10 flex flex-col justify-between min-h-[520px]">
+            <div className="lg:col-span-9 p-4 sm:p-6 md:p-10 flex flex-col justify-between min-h-[520px]">
               <AnimatePresence mode="wait">
                 {/* STEP 1: Yo'nalish */}
                 {currentStep === 1 && (
@@ -530,7 +558,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                       {categories.map((cat) => {
                         const Icon = cat.icon;
                         const isSelected = formData.category === cat.id;
@@ -541,7 +569,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                             onClick={() =>
                               setFormData({ ...formData, category: cat.id })
                             }
-                            className={`p-4 rounded-2xl border transition-all duration-200 cursor-pointer flex flex-col justify-between space-y-3 group ${
+                            className={`p-3 sm:p-4 rounded-2xl border transition-all duration-200 cursor-pointer flex flex-col justify-between space-y-3 group ${
                               isSelected
                                 ? "border-cyan-500 dark:border-cyan-400 bg-cyan-50/80 dark:bg-cyan-950/30 shadow-lg shadow-cyan-500/10 ring-2 ring-cyan-500/50"
                                 : "border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-950/40 hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-md"
@@ -558,10 +586,10 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                               )}
                             </div>
                             <div>
-                              <h4 className="font-bold text-slate-900 dark:text-white text-base">
+                              <h4 className="font-bold text-slate-900 dark:text-white text-sm sm:text-base">
                                 {cat.title}
                               </h4>
-                              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                              <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
                                 {cat.subtitle}
                               </p>
                             </div>
@@ -696,14 +724,14 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                       {evidenceList.map((item) => {
                         const isChecked = formData.evidences.includes(item.id);
                         return (
                           <div
                             key={item.id}
                             onClick={() => handleEvidenceToggle(item.id)}
-                            className={`p-3.5 rounded-xl border transition-all cursor-pointer flex items-center space-x-3 ${
+                            className={`p-2.5 sm:p-3.5 rounded-xl border transition-all cursor-pointer flex items-center space-x-3 ${
                               isChecked
                                 ? "border-cyan-500 dark:border-cyan-400 bg-cyan-50 dark:bg-cyan-950/30 text-slate-900 dark:text-white font-medium"
                                 : "border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/40 hover:border-slate-300 text-slate-600 dark:text-slate-400"
@@ -720,7 +748,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                                 <CheckCircle2 className="w-4 h-4 stroke-[3]" />
                               )}
                             </div>
-                            <span className="text-sm font-semibold">
+                            <span className="text-xs sm:text-sm font-semibold">
                               {item.label}
                             </span>
                           </div>
@@ -765,7 +793,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                     <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 dark:border-slate-800 pb-3">
                       <span className="inline-flex items-center text-xs font-bold text-cyan-600 dark:text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-3 py-1 rounded-full">
                         <Home className="w-3.5 h-3.5 mr-1.5" />
-                        Yo'nalish:{" "}
+                        {t("stepWizard.steps.direction")}:{" "}
                         {
                           categories.find((cat) => cat.id === formData.category)
                             ?.title
@@ -787,7 +815,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                     <div className="space-y-3 bg-slate-50 dark:bg-slate-950/80 p-4 rounded-2xl border border-slate-200 dark:border-slate-800">
                       <h4 className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
                         <ShieldAlert className="w-4 h-4 text-cyan-500" />
-                        Tavsiya etiladigan Qonuniy Asoslar
+                        {t("stepWizard.step4.legalNorms")}
                       </h4>
                       <div className="space-y-2">
                         {currentLegalInfo.laws.map((law, idx) => (
@@ -814,7 +842,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                             showReasoning ? "rotate-180" : ""
                           }`}
                         />
-                        Nima uchun ushbu moddalar tanlandi?
+                        {t("stepWizard.step4.whyTheseLaws")}
                       </button>
 
                       {showReasoning && (
@@ -829,7 +857,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                     {/* Harakat rejasi */}
                     <div className="space-y-3 bg-slate-50 dark:bg-slate-950/80 p-4 rounded-2xl border border-slate-200 dark:border-slate-800">
                       <h4 className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400">
-                        Ketma-ket Harakat Rejasi
+                        {t("stepWizard.step4.actionPlan")}
                       </h4>
                       <ol className="space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
                         {currentLegalInfo.actions.map((act, i) => (
@@ -846,9 +874,9 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                     {/* Preview Text */}
                     <div className="space-y-2">
                       <h4 className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400">
-                        Tayyor Ariza Matni
+                        {t("stepWizard.step4.readyAppeal")}
                       </h4>
-                      <div className="bg-slate-100 dark:bg-slate-950 p-4 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-mono text-slate-800 dark:text-slate-300 max-h-36 overflow-y-auto leading-relaxed whitespace-pre-wrap">
+                      <div className="bg-slate-100 dark:bg-slate-950 p-3 sm:p-4 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-mono text-slate-800 dark:text-slate-300 max-h-32 sm:max-h-36 overflow-y-auto leading-relaxed whitespace-pre-wrap">
                         {generateAppealText()}
                       </div>
                     </div>
@@ -862,7 +890,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                   onClick={handleBack}
                   disabled={currentStep === 1}
                   variant="outline"
-                  className="border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl px-5 disabled:opacity-30"
+                  className="border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl px-4 sm:px-5 disabled:opacity-30"
                 >
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   {t("stepWizard.navigation.back") || "Orqaga"}
@@ -872,7 +900,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                   <Button
                     onClick={() => setIsModalOpen(true)}
                     variant="outline"
-                    className="border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/80 text-slate-800 dark:text-slate-200 text-xs sm:text-sm py-5 rounded-xl"
+                    className="border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/80 text-slate-800 dark:text-slate-200 text-xs sm:text-sm py-4 sm:py-5 rounded-xl"
                   >
                     <FileText className="w-4 h-4 mr-2" />
                     {t("stepWizard.navigation.readyText") || "Matnni Ko'rish"}
@@ -881,7 +909,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                   {currentStep < 4 ? (
                     <Button
                       onClick={handleNext}
-                      className="bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-600 hover:opacity-95 text-white font-bold px-6 py-5 rounded-xl shadow-lg shadow-cyan-500/20 transition-all"
+                      className="bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-600 hover:opacity-95 text-white font-bold px-4 sm:px-6 py-4 sm:py-5 rounded-xl shadow-lg shadow-cyan-500/20 transition-all"
                     >
                       <span>
                         {t("stepWizard.navigation.continue") || "Davom etish"}
@@ -891,7 +919,7 @@ Sana: ${currentDateFormatted}             Imzo: __________`;
                   ) : (
                     <Button
                       onClick={() => setIsModalOpen(true)}
-                      className="bg-gradient-to-r from-emerald-500 via-cyan-500 to-indigo-600 hover:opacity-95 text-white font-bold px-6 py-5 rounded-xl shadow-lg shadow-cyan-500/25 transition-all"
+                      className="bg-gradient-to-r from-emerald-500 via-cyan-500 to-indigo-600 hover:opacity-95 text-white font-bold px-4 sm:px-6 py-4 sm:py-5 rounded-xl shadow-lg shadow-cyan-500/25 transition-all"
                     >
                       <Sparkles className="w-4 h-4 mr-2" />
                       {t("stepWizard.navigation.viewAndCopy") ||
