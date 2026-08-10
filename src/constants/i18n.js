@@ -54,6 +54,7 @@ export const translations = {
         step: "bosqich",
         remaining: "bosqich qoldi",
         ready: "Natija tayyor",
+        inProgress: "Jarayonda...",
       },
 
       steps: {
@@ -136,6 +137,94 @@ export const translations = {
         family: {
           title: "Oila huquqi",
           subtitle: "Aliment, nikoh, bola huquqi",
+        },
+      },
+
+      legalData: {
+        work: {
+          laws: [
+            {
+              title:
+                "Mehnat Kodeksi 161-modda — Mehnat shartnomasini bekor qilish",
+              desc: "Mehnat shartnomasi qonunda nazarda tutilgan asoslar bo'yicha bekor qilinadi.",
+            },
+            {
+              title: "Mehnat Kodeksi 244-modda — Ish haqini to'lash muddatlari",
+              desc: "Ish beruvchi xodimga ish haqini o'z vaqtida va to'liq to'lashi shart.",
+            },
+          ],
+          actions: [
+            "Ish beruvchiga rasmiy yozma e'tiroz yoki talabnoma yuboring.",
+            "Mehnat inspektsiyasiga (Bandlik vazirligi) murojaat yo'llang.",
+            "Natija bo'lmagan taqdirda Fuqarolik ishlar bo'yicha sudga da'vo arizasi kiriting.",
+          ],
+        },
+        consumer: {
+          laws: [
+            {
+              title:
+                "Iste'molchilar huquqlarini himoya qilish to'g'risida 18-modda",
+              desc: "Nuqsonli tovar sotilganda iste'molchi uni almashtirish yoki pulini qaytarishni talab qilishga haqli.",
+            },
+          ],
+          actions: [
+            "Sotuvchi/xizmat ko'rsatuvchiga chek va dalillar bilan yozma talabnoma bering.",
+            "Iste'molchilar huquqlarini himoya qilish agentligiga murojaat qiling.",
+          ],
+        },
+        housing: {
+          laws: [
+            {
+              title:
+                "Uy-joy Kodeksi 11-modda — Uy-joy huquqlarini himoya qilish",
+              desc: "Uy-joyga oid buzilgan huquqlar qonunchilikda nazarda tutilgan tartibda himoya qilinadi.",
+            },
+            {
+              title: "Uy-joy Kodeksi 86-modda — Turar joyni arendaga berish",
+              desc: "Turar joydan haq evaziga foydalanish shartnoma bilan rasmiylashtiriladi.",
+            },
+          ],
+          actions: [
+            "Ijaraga beruvchi yoki qarshi tomonga yozma bildirishnoma yuboring.",
+            "Uy-joy shartnomasi va to'lov kvitansiyalarini tayyorlab qo'ying.",
+            "Hududiy fuqarolik sudiga ariza bilan murojaat qiling.",
+          ],
+        },
+        utilities: {
+          laws: [
+            {
+              title: "Kommunal xizmat ko'rsatish qoidalari — Xizmat sifati",
+              desc: "Tashkilot iste'molchini uzluksiz va sifatli kommunal xizmat bilan ta'minlashi shart.",
+            },
+          ],
+          actions: [
+            "Tegishli kommunal korxonaga (gaz, elektr, suv) rasmiy e'tiroz yuboring.",
+            "MIB yoki Bosh prokuratura qoshidagi inspektsiyaga xabar bering.",
+          ],
+        },
+        fines: {
+          laws: [
+            {
+              title: "MJtK 315-modda — Ma'muriy nohaq qaror ustidan shikoyat",
+              desc: "Jarima qarori ustidan 10 kun muddatda yuqori organga yoki sudga shikoyat qilinishi mumkin.",
+            },
+          ],
+          actions: [
+            "Qaror yoki bayonnoma nusxasini oling.",
+            "10 kunlik muddatni o'tkazib yubormasdan ma'muriy sudga shikoyat kiriting.",
+          ],
+        },
+        family: {
+          laws: [
+            {
+              title: "Oila Kodeksi 96-modda — Aliment undirish",
+              desc: "Ota-ona voyaga yetmagan bolalariga ta'minot berishi shart.",
+            },
+          ],
+          actions: [
+            "Aliment undirish bo'yicha fuqarolik sudiga ariza yuboring.",
+            "Bolalarning tug'ilganlik haqidagi guvohnomalari nusxasini tayyorlang.",
+          ],
         },
       },
 
@@ -439,6 +528,7 @@ export const translations = {
         step: "босқич",
         remaining: "босқич қолди",
         ready: "Натижа тайёр",
+        inProgress: "Жараёнда...",
       },
 
       steps: {
@@ -536,6 +626,92 @@ export const translations = {
         family: {
           title: "Оила ҳуқуқи",
           subtitle: "Алимент, никоҳ, бола ҳуқуқлари",
+        },
+      },
+
+      legalData: {
+        work: {
+          laws: [
+            {
+              title:
+                "Меҳнат Кодекси 161-модда — Меҳнат шартномасини бекор қилиш",
+              desc: "Меҳнат шартномаси қонунда назарда тутилган асослар бўйича бекор қилинади.",
+            },
+            {
+              title: "Меҳнат Кодекси 244-модда — Иш ҳақини тўлаш муддатлари",
+              desc: "Иш берувчи ходимга иш ҳақини ўз вақтида ва тўлиқ тўлаши шарт.",
+            },
+          ],
+          actions: [
+            "Иш берувчига расмий ёзма эътироз ёки талабнома юборинг.",
+            "Меҳнат инспекциясига (Бандлик вазирлиги) мурожаат йўлланг.",
+            "Натижа бўлмаган тақдирда Фуқаролик ишлар бўйича судга да’во аризаси киритинг.",
+          ],
+        },
+        consumer: {
+          laws: [
+            {
+              title: "Истеъмолчилар ҳуқуқларини ҳимоя қилиш тўғрисида 18-модда",
+              desc: "Нақсонли товар сотилганда истеъмолчи уни алмаштириш ёки пулни қайтаришни талаб қилишга ҳақли.",
+            },
+          ],
+          actions: [
+            "Сотувчи/хизмат кўрсатувчига чек ва далиллар билан ёзма талабнома беринг.",
+            "Истеъмолчилар ҳуқуқларини ҳимоя қилиш агентлигига мурожаат қилинг.",
+          ],
+        },
+        housing: {
+          laws: [
+            {
+              title: "Уй-жой Кодекси 11-модда — Уй-жой ҳуқуқларини ҳимоя қилиш",
+              desc: "Уй-жойга оид бузилган ҳуқуқлар қонунчиликда назарда тутилган тартибда ҳимоя қилинади.",
+            },
+            {
+              title: "Уй-жой Кодекси 86-модда — Турар жойни арендага бериш",
+              desc: "Турар жойдан ҳақ эвазига фойдаланиш шартнома билан расмийлаштирилади.",
+            },
+          ],
+          actions: [
+            "Ижарага берувчи ёки қарши томонга ёзма билдиришнома юборинг.",
+            "Уй-жой шартномаси ва тўлов квитанцияларини тайёрлаб қўйинг.",
+            "Ҳудудий фуқаролик судига ариза билан мурожаат қилинг.",
+          ],
+        },
+        utilities: {
+          laws: [
+            {
+              title: "Коммунал хизмат кўрсатиш қоидалари — Хизмат сифати",
+              desc: "Ташкилот истеъмолчини узлуксиз ва сифатли коммунал хизмат билан таъминлаши шарт.",
+            },
+          ],
+          actions: [
+            "Тегишли коммунал корхонга (газ, электр, сув) расмий эътироз юборинг.",
+            "MIB ёки Бош прокуратура қошидаги инспекцияга хабар беринг.",
+          ],
+        },
+        fines: {
+          laws: [
+            {
+              title: "MJtK 315-модда — Маъмурий ноҳақ қарор устидан шикоят",
+              desc: "Жарима қарори устидан 10 кун муддатда юқори органга ёки судга шикоят қилиниши мумкин.",
+            },
+          ],
+          actions: [
+            "Қарор ёки баённома нусхасини олинг.",
+            "10 кунлик муддатни ўтказиб юбормасдан маъмурий судга шикоят киритинг.",
+          ],
+        },
+        family: {
+          laws: [
+            {
+              title: "Оила Кодекси 96-модда — Алимент ундириш",
+              desc: "Ота-она voyaga yetmagan болаларига таъминот беради.",
+            },
+          ],
+          actions: [
+            "Алимент ундириш бўйича фуқаролик судига ариза юборинг.",
+            "Болаларнинг туғилганлик ҳақидаги гувоҳномалари нусхасини тайёрланг.",
+          ],
         },
       },
 
@@ -839,6 +1015,7 @@ export const translations = {
         step: "этап",
         remaining: "этапов осталось",
         ready: "Результат готов",
+        inProgress: "В процессе...",
       },
 
       steps: {
@@ -923,6 +1100,95 @@ export const translations = {
         family: {
           title: "Семейное право",
           subtitle: "Алименты, брак, права ребёнка",
+        },
+      },
+
+      legalData: {
+        work: {
+          laws: [
+            {
+              title:
+                "Трудовой кодекс 161 статья — Расторжение трудового договора",
+              desc: "Трудовой договор прекращается на основаниях, предусмотренных законом.",
+            },
+            {
+              title:
+                "Трудовой кодекс 244 статья — Сроки выплаты заработной платы",
+              desc: "Работодатель обязан выплачивать зарплату сотруднику вовремя и полностью.",
+            },
+          ],
+          actions: [
+            "Направьте работодателю официальное письменное возражение или претензию.",
+            "Обратитесь в трудовую инспекцию (Министерство занятости).",
+            "Если результата нет, подайте иск в суд по гражданским делам.",
+          ],
+        },
+        consumer: {
+          laws: [
+            {
+              title: "О защите прав потребителей 18 статья",
+              desc: "Если товар оказался некачественным, потребитель вправе потребовать обмена или возврата денег.",
+            },
+          ],
+          actions: [
+            "Направьте продавцу/исполнителю письменную претензию с чеком и доказательствами.",
+            "Обратитесь в агентство по защите прав потребителей.",
+          ],
+        },
+        housing: {
+          laws: [
+            {
+              title: "Жилищный кодекс 11 статья — Защита жилищных прав",
+              desc: "Нарушенные жилищные права защищаются в установленном законом порядке.",
+            },
+            {
+              title: "Жилищный кодекс 86 статья — Аренда жилого помещения",
+              desc: "Пользование жилым помещением за плату оформляется договором.",
+            },
+          ],
+          actions: [
+            "Направьте арендодателю или противоположной стороне письменное уведомление.",
+            "Подготовьте договор аренды и платежные квитанции.",
+            "Обратитесь с заявлением в районный гражданский суд.",
+          ],
+        },
+        utilities: {
+          laws: [
+            {
+              title:
+                "Правила предоставления коммунальных услуг — Качество услуги",
+              desc: "Организация обязана обеспечивать потребителя бесперебойной и качественной коммунальной услугой.",
+            },
+          ],
+          actions: [
+            "Направьте официальную претензию соответствующей коммунальной организации.",
+            "Сообщите в инспекцию при МИБ или Генпрокуратуре.",
+          ],
+        },
+        fines: {
+          laws: [
+            {
+              title:
+                "КоАП 315 статья — Жалоба на административное постановление",
+              desc: "На постановление о штрафе можно подать жалобу в течение 10 дней.",
+            },
+          ],
+          actions: [
+            "Получите копию постановления или протокола.",
+            "Подайте жалобу в административный суд в течение 10 дней.",
+          ],
+        },
+        family: {
+          laws: [
+            {
+              title: "Семейный кодекс 96 статья — Взыскание алиментов",
+              desc: "Родители обязаны обеспечивать своих несовершеннолетних детей.",
+            },
+          ],
+          actions: [
+            "Подайте заявление в гражданский суд о взыскании алиментов.",
+            "Подготовьте копии свидетельств о рождении детей.",
+          ],
         },
       },
 
@@ -1228,6 +1494,7 @@ export const translations = {
         step: "step",
         remaining: "steps left",
         ready: "Result ready",
+        inProgress: "In progress...",
       },
 
       steps: {
@@ -1311,6 +1578,93 @@ export const translations = {
         family: {
           title: "Family law",
           subtitle: "Alimony, marriage, child rights",
+        },
+      },
+
+      legalData: {
+        work: {
+          laws: [
+            {
+              title:
+                "Labor Code Article 161 — Termination of an employment contract",
+              desc: "An employment contract is terminated on the grounds provided by law.",
+            },
+            {
+              title: "Labor Code Article 244 — Salary payment deadlines",
+              desc: "The employer must pay wages to the employee on time and in full.",
+            },
+          ],
+          actions: [
+            "Send the employer an official written objection or claim.",
+            "Contact the labor inspectorate (Ministry of Employment).",
+            "If there is no result, file a civil court claim.",
+          ],
+        },
+        consumer: {
+          laws: [
+            {
+              title: "Consumer Protection Law Article 18",
+              desc: "If a product is defective, the consumer has the right to request a replacement or a refund.",
+            },
+          ],
+          actions: [
+            "Send the seller/provider a written claim with a receipt and supporting evidence.",
+            "Contact the consumer protection agency.",
+          ],
+        },
+        housing: {
+          laws: [
+            {
+              title: "Housing Code Article 11 — Protection of housing rights",
+              desc: "Violations of housing rights are protected in the manner prescribed by law.",
+            },
+            {
+              title: "Housing Code Article 86 — Rental of residential property",
+              desc: "The use of residential property for payment must be formalized by contract.",
+            },
+          ],
+          actions: [
+            "Send the landlord or the opposing party a written notice.",
+            "Prepare the lease agreement and payment receipts.",
+            "Submit a statement to the district civil court.",
+          ],
+        },
+        utilities: {
+          laws: [
+            {
+              title: "Utility Service Rules — Service quality",
+              desc: "The organization must provide uninterrupted and high-quality utility service.",
+            },
+          ],
+          actions: [
+            "Submit an official complaint to the relevant utility provider.",
+            "Report it to the inspectorate under the MIB or the Prosecutor General's Office.",
+          ],
+        },
+        fines: {
+          laws: [
+            {
+              title:
+                "Administrative Code Article 315 — Complaint against an administrative decision",
+              desc: "A fine decision may be appealed within 10 days.",
+            },
+          ],
+          actions: [
+            "Obtain a copy of the decision or protocol.",
+            "File a complaint with the administrative court within 10 days.",
+          ],
+        },
+        family: {
+          laws: [
+            {
+              title: "Family Code Article 96 — Alimony recovery",
+              desc: "Parents are required to support their minor children.",
+            },
+          ],
+          actions: [
+            "File an application with the civil court for alimony recovery.",
+            "Prepare copies of the children's birth certificates.",
+          ],
         },
       },
 
