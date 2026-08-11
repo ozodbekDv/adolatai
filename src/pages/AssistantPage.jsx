@@ -84,6 +84,48 @@ export const AssistantPage = () => {
   };
 
   // ====================================================
+  // SANITIZE AI TEXT (remove markdown like ###, **, [link](url), bullets)
+  // ====================================================
+
+  const sanitizeMessage = (text) => {
+    if (!text || typeof text !== "string") return text;
+
+    let s = text;
+
+    // Remove code fences but keep inner content
+    s = s.replace(/```[\s\S]*?```/g, (m) => m.replace(/```/g, ""));
+
+    // Remove heading hashes at line starts
+    s = s.replace(/^#{1,6}\s*/gm, "");
+
+    // Replace markdown links [text](url) => text
+    s = s.replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1");
+
+    // Remove bold/italic markers **text**, *text*, __text__, _text_
+    s = s.replace(/\*\*(.*?)\*\*/g, "$1");
+    s = s.replace(/\*(.*?)\*/g, "$1");
+    s = s.replace(/__(.*?)__/g, "$1");
+    s = s.replace(/_(.*?)_/g, "$1");
+
+    // Remove inline code ticks
+    s = s.replace(/`([^`]+)`/g, "$1");
+
+    // Remove list markers at start of lines like '* ', '- ', '+ '
+    s = s.replace(/^[\*\-\+]\s+/gm, "");
+
+    // Collapse multiple blank lines
+    s = s.replace(/\n{3,}/g, "\n\n");
+
+    // Trim trailing spaces per line and overall
+    s = s
+      .split("\n")
+      .map((ln) => ln.replace(/\s+$/g, ""))
+      .join("\n");
+
+    return s.trim();
+  };
+
+  // ====================================================
   // AUTO SCROLL
   // ====================================================
 
@@ -306,15 +348,17 @@ export const AssistantPage = () => {
       const aiReply = await sendToBackendAPI(currentText, updatedMessages);
 
       // ---------------------------------------------
-      // AI MESSAGE
+      // AI MESSAGE (sanitize markdown-like tokens for clean display)
       // ---------------------------------------------
+
+      const cleaned = sanitizeMessage(aiReply);
 
       const aiMsg = {
         id: (Date.now() + 1).toString(),
 
         sender: "ai",
 
-        text: aiReply,
+        text: cleaned,
 
         timestamp: new Date().toLocaleTimeString([], {
           hour: "2-digit",
